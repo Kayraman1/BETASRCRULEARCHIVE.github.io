@@ -1,0 +1,331 @@
+Ruleset:
+
+General Rules:
+	-All runs require a complete video for verification
+	-The video must remain permanently accessible to the Mod Team
+	-Public or Unlisted YouTube videos, Twitch Highlights and other permanent video-hosting sites are allowed
+	-Twitch VODs, Private YouTube videos, TikTok videos, Xbox Clips, mega.nz links and other temporary or file-sharing services are not allowed
+	-If the video becomes unavailable, the run will be rejected. Evidence that the video was previously available will not be accepted
+	-All runs must include in-game sound. Silent runs will be rejected
+	-The Full HUD must remain enabled throughout the run
+	-The Replay feature cannot be used as a recording method. Runs recorded using Replay will be rejected
+	-The use of mods in any form is strictly forbidden. This includes modifying the game or using mods to obtain additional items or currency
+	-Listing the car and tune used in the run description is recommended, but not required
+	-The Mod Team reserves the right to request details about the car and tune used
+	-If a run is declared invalid after re-evaluation, the decision is final. Further DMs or spam concerning the decision will not be answered
+    -Track cuts are allowed. Checkpoints are the only enforced track limits
+	-All DLC and additional content is allowed unless stated otherwise in the Category
+	-The Order in which Events/Races/Stunts... are to be done is left to the Runner unless specified otherwise
+	-Additional overlays using the game's Data Out feature are allowed if the Game allows it
+	-The submitted platform must be set to PC when Data Out overlays are used	
+	-All Difficulty Settings except : Assisted Braking,Assisted Steering, Auto-Steering(FH5 onwards) and Anna's Autodrive are allowed
+Forza Horizon:
+	Forza Horizon [2012]
+		Full Game Runs:
+			-Any Difficulty Settings are allowed
+			-Any Upgrades and Tunings are allowed
+			-Pausing and Menuing count towards the final time
+			-For runs longer than 4 Hours, the runner may take a total break of up to 1 Hour. This may be taken all at once or split into multiple breaks
+			-For runs longer than 10 Hours, the runner may take a total break of up to 2.5 Hours
+			-Rewinds are allowed and count towards the final time
+
+			Any%:
+				-Time starts with the click of the Singleplayer button
+				-Time ends on the frame where the player loses control of their car after defeating Darius Flynt
+				-Timing is in RTA
+
+			Horizon Rally:
+				-Time starts with the click of the Singleplayer button
+				-Time ends on the frame where the final race of the Horizon Rally DLC is completed
+				-Timing is in RTA
+
+			100%:
+				-Time starts with the click of the Singleplayer button
+				-Time ends when the final event required for 100% is completed
+				-Timing is in RTA
+				-100% requires all Festival Races, Street Races, Star Showdowns, Showcase Events and PR Stunts to be completed
+
+			All Showcase Events:
+				-Time starts with the press of the Start Race button for the first Showcase Event
+				-Time ends when the final Showcase Event is completed
+				-Resetting the game or using a new save is not required
+				-Timing is in RTA
+
+		Individual Races:
+			-Track cuts are allowed. Checkpoints are the only enforced track limits
+			-Rewinds are not allowed
+			-Timing is in IGT
+			-The final time is the time shown by the game after completing the race
+			-The final time must be shown at the end of the submitted video
+			-The car's Class must be visible at some point during the run for verification
+			-The car's Class may be shown in the pre-race menus or on the post-race leaderboard
+
+	Forza Horizon 2 [2014]
+		FH2 Specific Rules:
+			-The Xbox One and Xbox 360 versions have separate leaderboards
+			-Race layouts, Road Trips and the Map differ depending on the version of the game
+			-Runs must be submitted to the leaderboard matching the version used
+			
+		Full Game Runs:
+			-Any Difficulty Settings are allowed
+			-Any Upgrades and Tunings are allowed
+			-Pausing and Menuing count towards the final time
+			-Glitches are only allowed for the designated Glitched Category
+			-Fast Travel is only allowed for the designated Fast Travel Category
+			-For runs longer than 4 Hours, the runner may take a total break of up to 1 Hour. This may be taken all at once or split into multiple breaks
+			-For runs longer than 10 Hours, the runner may take a total break of up to 2.5 Hours
+			-Rewinds are allowed and count towards the final time
+
+			Any%:
+				-Time starts when the player chooses their Video Settings
+				-Time ends when the player crosses the finish line in the Horizon Finale
+				-Timing is in RTA
+
+			100%:
+				-Time starts when the player chooses their Video Settings
+				-Time ends when the Options Menu displays 100% completion
+				-Timing is in RTA
+
+			Demo%:
+				-Time starts when the player chooses their Video Settings
+				-Time ends when the Demo is completed
+				-Timing is in RTA
+
+			All Showcase Events:
+				-Time starts when the first Showcase Event begins
+				-Time ends when the final Showcase Event is completed
+				-Resetting the game or using a new save is not required
+				-Timing is in RTA
+
+			All Bucket List Events:
+				-Time starts when the first Bucket List Event begins
+				-Time ends when the final Bucket List Event is completed
+				-Resetting the game or using a new save is not required
+				-Timing is in RTA
+
+		Individual Races:
+			-Track cuts are allowed. Checkpoints are the only enforced track limits
+			-Rewinds are not allowed
+			-Timing is in IGT
+			-The final time is the time shown by the game after completing the race
+			-The final time must be shown at the end of the submitted video
+			-The car's Class must be visible at some point during the run for verification
+			-The car's Class may be shown in the pre race menus or on the post-race leaderboard
+			-The submitted run must use a car from the correct Car Category
+			-Refer to the Car List for the available Car Categories:
+			 https://docs.google.com/spreadsheets/d/1QGlT8Owh-msZr38KHMwHO3I4Y4r-RY25/edit?usp=sharing&ouid=104915398604400600181&rtpof=true&sd=true
+
+
+			Showcase Events:
+				-Timing is in IGT
+				-The final time is the time shown by the game after completing the Showcase Event
+				-The final time must be shown at the end of the submitted video
+
+	Forza Horizon 3 [2016]
+		Full Game Runs:
+			-For achievement-related categories, such as All Barn Finds, timing ends when the associated achievement requirements have been met
+			-Any Difficulty Settings are allowed
+			-Any Upgrades and Tunings are allowed
+			-Pausing and Menuing count towards the final time
+			-For runs longer than 4 Hours, the runner may take a total break of up to 1 Hour. This may be taken all at once or split into multiple breaks
+			-For runs longer than 10 Hours, the runner may take a total break of up to 2.5 Hours
+			-Rewinds are allowed and count towards the final time
+
+			Any%:
+				-Time starts when the Brightness Settings screen begins to fade
+				-Time ends on the first full white frame during the race "Big Air"
+				-Timing is in RTA
+				-Milliseconds are not tracked
+				-VIP benefits, the Auction House and Tokens are not allowed
+
+			All Showcase Events:
+				-Time starts on the first frame of "Go!" in the first Showcase Event
+				-Time ends on the first full white frame in the final Showcase Event
+				-Timing is in RTA
+				-Milliseconds are not tracked
+				-Resetting the game or using a new save is not required
+
+			Unlock Goliath:
+				-Time starts when the Brightness Settings screen begins to fade
+				-Time ends on the first full white frame after completing "The Goliath"
+				-Timing is in RTA
+				-Milliseconds are not tracked
+				-VIP benefits, the Auction House and Tokens are not allowed
+
+		Individual Races:
+			-Track cuts are allowed. Checkpoints are the only enforced track limits
+			-The final time is the time shown by the game after completing the race
+			-The final time must be shown using an in-game screen at the end of the submitted video
+			-Custom Layouts are not allowed
+			-Changing Car Restrictions and Weather/Season/Day is Permitted
+			-The original Forza race layout and race length must be used
+			-Rewinds are not allowed
+			-The car's Class must be visible at some point during the run for verification
+			-The car's Class may be shown in the pre-race menus or on the post-race leaderboard
+			Showcase Events:
+				-Timing is in IGT
+				-The final time is the time shown by the game after completing the Showcase Event
+				-The final time must be shown at the end of the submitted video
+			
+
+	Forza Horizon 4 [2018]
+		Full Game Runs:
+			-Any Difficulty Settings are allowed
+			-Any Upgrades and Tunings are allowed
+			-Pausing and Menuing count towards the final time
+			-For runs longer than 4 Hours, the runner may take a total break of up to 1 Hour. This may be taken all at once or split into multiple breaks
+			-For runs longer than 10 Hours, the runner may take a total break of up to 2.5 Hours
+			-Rewinds are allowed and count towards the final time
+			
+			All Races:
+				-Time starts on with the Press of the Start Race Buton for the first race
+				-Time ends on the first frame after completing the final race required by the category
+				-Timing is in RTA
+				-The Ice Flats Drag Strip does not need to be completed because it is the only season-specific event in the run
+				-Resetting the game or using a new save is not required
+
+		Individual Races:
+			-Track cuts are allowed. Checkpoints are the only enforced track limits
+			-The final time is the time shown by the game after completing the race
+			-The final time must be shown using an in-game screen at the end of the submitted video
+			-Custom Layouts are not allowed
+			-Changing Car Restrictions and Weather/Season/Day is Permitted
+			-The original Forza race layout and race length must be used
+			-Rewinds are not allowed
+			-The car's Class must be visible at some point during the run for verification
+			-The car's Class may be shown in the pre-race menus or on the post-race leaderboard
+			Showcase Events:
+				-Timing is in IGT
+				-The final time is the time shown by the game after completing the Showcase Event
+				-The final time must be shown at the end of the submitted video
+
+	Forza Horizon 5 [2021]
+		Core Rules:
+			-Track cuts are allowed. Checkpoints are the only enforced track limits
+			-All DLC and additional content is allowed
+			-Additional overlays using the game's Data Out feature are allowed
+			-The submitted platform must be set to PC when Data Out overlays are used
+
+		Full Game Runs:
+			-All Upgrades and Tunings are allowed
+			-All Difficulty settings except :Auto-Steering,Assisted-Steering and Assisted-Braking are allowed
+			-Pausing and Menuing count towards the final time
+			-For achievement-related categories, such as All Barn Finds, time ends when the associated achievement requirements have been completed
+			-Timing is in RTA
+			-For runs with a length above 4 Hours, the runner may take a total break of up to 1 Hour. This may be taken all at once or split into multiple breaks
+			-For runs above 10 Hours, the allowed total break time is 2.5 Hours
+			Any%:
+				-Time starts upon gaining Control of the Ford Bronco in the initial Drive
+				-Time ends when the Hall of Fame entry cutscene is played and the Player looses control of their Car
+				-Timing is in RTA
+
+			All Showcase Events and Expeditions:
+				-All Showcase Events and Expeditions must be completed
+				-Resetting the game or using a new save is not required
+				-Optional Expedition Accolades are not required
+				-Time starts on the first frame of "¡GO!" in the first event
+				-Time ends when the player crosses the finish line in the final event
+				-Timing is in RTA
+				-Events may be completed in any order
+				-Exiting after the race section of "Buggy and the Beast" is allowed
+
+			All Festivals Any%:
+				-All 6 Horizon Festival locations must be unlocked
+				-Time starts when the player first gains control of the Ford Bronco on the ground during the Initial Drive
+				-Time ends when the final Festival Expedition cutscene is triggered and control is removed from the player
+				-Timing is in RTA
+				-Races and Festival Expeditions may be completed in any order
+				-Fast Travel may be used in any form depending on sub category
+
+			All Races:
+				-All Road Races, Dirt Races, Cross Country Races, Street Races and Drag Races must be completed
+				-This includes "The Goliath", "The Colossus", "The Gauntlet", "The Titan" and "The Marathon"
+				-Midnight Battles are not required
+				-FOMO Races, including Seasonal and Horizon Realms events, are not required
+				-Time starts on the first frame of "¡GO!" in the first race
+				-Time ends when the player crosses the finish line in the final race
+				-Timing is in RTA
+				-Races may be completed in any order
+				-Fast Travel may be used in any form depending on sub category
+
+			All [Category] Races:
+				-All [Category] Races must be completed
+				-This includes that categories "Final" Race/s
+				-FOMO Races, including Seasonal and Horizon Realms events, are not required
+				-Time starts on the first frame of "¡GO!" in the first race
+				-Time ends when the player crosses the finish line in the final race
+				-Timing is in RTA
+				-Races may be completed in any order
+				-Fast Travel may be used in any form depending on sub category
+
+
+			3 Stars on All PR Stunts:
+				-3 Stars must be earned on every PR Stunt
+				-This includes "The Juggernaut"
+				-Resetting the game or using a new save is not required
+				-Time starts when the first PR Stunt is triggered
+				-Time ends on the first frame that 3 Stars are displayed after completing the final PR Stunt
+				-Timing is in RTA
+				-PR Stunts may be completed in any order
+				-Fast Travel may be used in any form depending on sub category
+
+		Individual Races:
+			-Track cuts are allowed. Checkpoints are the only enforced track limits
+			-The final time is the time shown by the game after completing the race
+			-The final time must be shown using an in-game screen at the end of the submitted video
+			-Custom Layouts are not allowed
+			-Changing Car Restrictions and Weather/Season/Day is Permitted
+			-The original Forza race layout and race length must be used
+			-Circuit races must use their original lap count.
+			-Rewinds are not allowed
+			-The car's Class must be visible at some point during the run for verification
+			-The car's Class may be shown in the pre-race menus or on the post-race leaderboard
+			-For Horizon Rally events, the "Horizon Rally" mode must be used
+			-Runs completed using "Horizon Race" mode for a Horizon Rally event will be rejected
+			Showcase Events:
+				-Timing is in IGT
+				-The final time is the time shown by the game after completing the Showcase Event
+				-The final time must be shown at the end of the submitted video
+
+	Forza Horizon 6 [2026]
+		Full Game Runs:
+			-All Upgrades and Tunings are allowed
+			-All Difficulty settings except :Auto-Steering,Assisted-Steering,Assisted-Braking and Anna's Autodrive are allowed
+			-Pausing and Menuing count towards the final time
+			-For achievement-related categories, such as All Barn Finds, time ends when the associated achievement requirements have been completed
+			-Timing is in RTA
+			-For runs with a length above 4 Hours, the runner may take a total break of up to 1 Hour. This may be taken all at once or split into multiple breaks
+			-For runs above 10 Hours, the allowed total break time is 2.5 Hours
+
+			Any% (Horizon):
+				-Time starts when the player first gains control of the Nissan GT-R NISMO on the ground during the Initial Drive
+				-Time ends when the screen fades to black after completing the Gold Wristband Event
+
+			Any% (Japan)
+				-Time starts when the player first gains control of the Nissan GT-R NISMO on the ground during the Initial Drive
+				-Time ends when the Gold Stamp is obtained
+
+			All Races/All Races [Category]/All Wristbands:
+				-All Road Races, Dirt Races, Cross Country Races, Street Races, Touge Races and Drag Races must be completed
+				-For All Races [Category] all races of that Category must be completed
+				-For All Wristbands all Wristband events have to be Completed
+				-Resetting the game or using a new save is not required
+				-Time starts when "Start Race" is selected for the first race
+				-Time ends when the player crosses the finish line in the final race
+
+		Individual Races:
+			-Track cuts are allowed. Checkpoints are the only enforced track limits
+			-The final time is the time shown by the game after completing the race
+			-The final time must be shown using an in-game screen at the end of the submitted video
+			-Custom Layouts are not allowed
+			-Changing Car Restrictions and Weather/Season/Day is Permitted for the Standard Race Category.
+			-For Festival Races the Settings must remain untouched
+			-The original Forza race layout and race length must be used
+			-Rewinds are not allowed
+			-The car's Class must be visible at some point during the run for verification
+			-The car's Class may be shown in the pre-race menus or on the post-race leaderboard
+			-For Timeattacks Cars Class must be shown before or after attempt
+			Showcase Events:
+				-Timing is in IGT
+				-The final time is the time shown by the game after completing the Showcase Event
+				-The final time must be shown at the end of the submitted video

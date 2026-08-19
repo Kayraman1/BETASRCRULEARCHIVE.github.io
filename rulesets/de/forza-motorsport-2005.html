@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Forza Motorsport [2005] Regeln</title>
+
+    <style>
+      :root {
+        --background-image: url("https://static.wikia.nocookie.net/forzamotorsport/images/7/76/FM1_Boxart.jpg/revision/latest?cb=20220614191507");
+
+        --text: #ffffff;
+        --muted-text: #c2c7cf;
+        --tree-lines: rgba(255, 255, 255, 0.3);
+        --accent: #e94b35;
+        --panel: rgba(8, 10, 13, 0.78);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: #080a0d;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+
+        color: var(--text);
+        font-family:
+          Consolas,
+          "Courier New",
+          monospace;
+      }
+
+      .page-background {
+        position: fixed;
+        z-index: -2;
+        inset: -10px;
+
+        background-image: var(--background-image);
+        background-position: center;
+        background-size: cover;
+
+        filter: blur(2px);
+        transform: scale(1.03);
+      }
+
+      .page-overlay {
+        position: fixed;
+        z-index: -1;
+        inset: 0;
+
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(5, 7, 10, 0.7),
+            rgba(5, 7, 10, 0.9)
+          );
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 30px;
+
+        min-height: 70px;
+        padding: 16px 5%;
+
+        background: rgba(5, 7, 10, 0.82);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+        backdrop-filter: blur(8px);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      header a {
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      header a:hover {
+        color: var(--accent);
+      }
+
+      .language-selector {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .language-selector label {
+        width: auto;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .language-selector select {
+        width: auto;
+        min-width: 130px;
+        padding: 8px 12px;
+
+        background: rgba(10, 12, 16, 0.85);
+        color: #ffffff;
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+      }
+
+      .language-selector select:focus {
+        border-color: var(--accent);
+        outline: 2px solid rgba(233, 75, 53, 0.25);
+      }
+
+      .language-selector option:disabled {
+        color: #777b82;
+      }
+
+      main {
+        width: min(1200px, 90%);
+        margin: 60px auto;
+      }
+
+      .rules-heading {
+        margin-bottom: 30px;
+      }
+
+      .rules-heading p {
+        margin: 0 0 10px;
+
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .rules-heading h2 {
+        margin: 0;
+
+        font-size: clamp(35px, 6vw, 70px);
+        line-height: 1;
+      }
+
+      .rules-heading span {
+        display: block;
+        margin-top: 16px;
+
+        color: var(--muted-text);
+        line-height: 1.6;
+      }
+
+      .rules-panel {
+        padding: clamp(20px, 4vw, 50px);
+
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.17);
+
+        backdrop-filter: blur(7px);
+      }
+
+      .rule-tree,
+      .rule-tree ul {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      .rule-tree ul {
+        margin: 5px 0 5px 8px;
+        padding-left: 28px;
+
+        border-left: 1px solid var(--tree-lines);
+      }
+
+      .rule-tree li {
+        position: relative;
+        padding: 5px 0;
+      }
+
+      .rule-tree ul > li::before {
+        position: absolute;
+        top: 17px;
+        left: -28px;
+
+        width: 18px;
+        border-top: 1px solid var(--tree-lines);
+
+        content: "";
+      }
+
+      summary {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+
+        width: fit-content;
+
+        color: var(--text);
+        font-weight: bold;
+
+        cursor: pointer;
+        user-select: none;
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      summary::before {
+        color: var(--accent);
+        content: "▶";
+
+        font-size: 10px;
+        transition: transform 150ms ease;
+      }
+
+      details[open] > summary::before {
+        transform: rotate(90deg);
+      }
+
+      summary:hover {
+        color: var(--accent);
+      }
+
+      .rule {
+        display: block;
+
+        color: #f3f3f3;
+        line-height: 1.55;
+      }
+
+      .important {
+        color: #ffb5a7;
+      }
+
+      footer {
+        padding: 30px 5%;
+
+        background: rgba(5, 7, 10, 0.85);
+        color: var(--muted-text);
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      @media (max-width: 750px) {
+        header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        main {
+          width: 94%;
+          margin: 35px auto;
+        }
+
+        .rule-tree ul {
+          margin-left: 3px;
+          padding-left: 18px;
+        }
+
+        .rule-tree ul > li::before {
+          left: -18px;
+          width: 11px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        summary::before {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-background" aria-hidden="true"></div>
+    <div class="page-overlay" aria-hidden="true"></div>
+
+    <header>
+      <h1>Forza Speedrunning Community</h1>
+
+      <a href="../../index.html">← Zurück zum Archiv</a>
+
+      <div class="language-selector">
+        <label for="language">Sprache</label>
+
+        <select id="language">
+          <option value="en">English</option>
+          <option value="de" selected>Deutsch</option>
+          <option value="fr">Français</option>
+          <!-- Diese Übersetzungen existieren noch nicht. -->
+          <option value="es" disabled>Español – bald verfügbar</option>
+          <option value="ja" disabled>日本語 – bald verfügbar</option>
+          <option value="ru" disabled>Русский – bald verfügbar</option>
+        </select>
+      </div>
+    </header>
+
+    <main>
+      <section class="rules-heading">
+        <p>Offizielles Community-Regelwerk</p>
+
+        <h2>Forza Motorsport [2005]</h2>
+
+        <span>
+          Wähle eine Überschrift aus, um den entsprechenden Teil
+          des Regelbaums zu öffnen oder zu schließen.
+        </span>
+      </section>
+
+      <section class="rules-panel">
+        <ul class="rule-tree">
+          <!-- Allgemeine Regeln -->
+
+          <li>
+            <details open>
+              <summary>Allgemeine Regeln</summary>
+
+              <ul>
+                <li>
+                  <span class="rule">
+                    Für alle Runs ist ein Video zur Verifizierung
+                    erforderlich.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    Videos müssen dauerhaft und sicher gehostet sein.
+                    YouTube oder dauerhafte Twitch-VODs werden empfohlen.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule important">
+                    Sollte das Video nicht mehr verfügbar sein,
+                    kann der Run abgelehnt werden.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    Entscheidungen der Moderation, die nach einer
+                    erneuten Überprüfung getroffen wurden, dürfen
+                    nicht durch weitere Direktnachrichten oder Spam
+                    bedrängt werden.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    Der Spielton muss während des Runs hörbar sein.
+                  </span>
+                </li>
+              </ul>
+            </details>
+          </li>
+
+          <!-- Spielspezifische Regeln -->
+
+          <li>
+            <details open>
+              <summary>Forza Motorsport</summary>
+
+              <ul>
+                <li>
+                  <details open>
+                    <summary>Forza Motorsport [2005]</summary>
+
+                    <ul>
+                      <!-- Komplettspiel-Runs -->
+
+                      <li>
+                        <details open>
+                          <summary>Komplettspiel-Runs</summary>
+
+                          <ul>
+                            <li>
+                              <span class="rule">
+                                Alle Schwierigkeitsgradeinstellungen
+                                sind erlaubt.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Alle Upgrades und Tuning-Einstellungen
+                                sind erlaubt.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Pausen und das Öffnen von Menüs zählen
+                                zur Endzeit.
+                              </span>
+                            </li>
+                          </ul>
+                        </details>
+                      </li>
+
+                      <!-- Alle Rennen -->
+
+                      <li>
+                        <details open>
+                          <summary>Alle Rennen</summary>
+
+                          <ul>
+                            <li>
+                              <span class="rule">
+                                Die Zeitmessung beginnt, wenn die
+                                Schaltfläche „Rennen starten“ gedrückt wird.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Die Zeitmessung endet mit dem letzten Frame,
+                                in dem der Spieler im letzten Rennen die
+                                Kontrolle über das Fahrzeug besitzt.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Jedes in der Garage verfügbare Fahrzeug
+                                darf verwendet werden, sofern das Spiel
+                                dessen Verwendung erlaubt.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Die Zeit wird in Echtzeit gemessen (RTA).
+                              </span>
+                            </li>
+                          </ul>
+                        </details>
+                      </li>
+
+                      <!-- Serien-Runs -->
+
+                      <li>
+                        <details>
+                          <summary>Serien-Runs</summary>
+
+                          <ul>
+                            <li>
+                              <span class="rule">
+                                Die Zeitmessung beginnt, wenn beim ersten
+                                Rennen der ausgewählten Serie die
+                                Schaltfläche „Rennen starten“ gedrückt wird.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Die Zeitmessung endet mit dem letzten Frame,
+                                in dem der Spieler im letzten Rennen dieser
+                                Serie die Kontrolle über das Fahrzeug besitzt.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Die Zeit wird in Echtzeit gemessen (RTA).
+                              </span>
+                            </li>
+                          </ul>
+                        </details>
+                      </li>
+
+                      <!-- Zeitfahren -->
+
+                      <li>
+                        <details>
+                          <summary>Zeitfahren</summary>
+
+                          <ul>
+                            <li>
+                              <span class="rule">
+                                Für die Zeitmessung wird die Spielzeit
+                                verwendet (IGT).
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Die Endzeit entspricht dem Wert, den das
+                                Spiel am Ende des Zeitfahrens anzeigt.
+                              </span>
+                            </li>
+                          </ul>
+                        </details>
+                      </li>
+
+                      <!-- Karriere-Runs -->
+
+                      <li>
+                        <details>
+                          <summary>Karriere-Runs</summary>
+
+                          <ul>
+                            <li>
+                              <span class="rule">
+                                Die Zeitmessung einer Freischaltkategorie
+                                beginnt, wenn der Spieler seinen Profilnamen
+                                bestätigt.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Die Zeitmessung einer Freischaltkategorie
+                                endet, sobald das Spiel bestätigt, dass die
+                                entsprechende Kategorie freigeschaltet wurde.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Die Zeitmessung eines Karriere-Any%-Runs
+                                beginnt, wenn der Spieler seinen Profilnamen
+                                bestätigt.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Die Zeitmessung eines Karriere-Any%-Runs
+                                endet mit dem letzten Frame des letzten
+                                erforderlichen Karriererennens.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Karriere-Runs dürfen in mehreren
+                                aufgezeichneten Teilen abgeschlossen werden.
+                              </span>
+
+                              <ul>
+                                <li>
+                                  <span class="rule">
+                                    Vor dem Pausieren müssen die Garage,
+                                    das verfügbare Geld und der aktive Timer
+                                    gezeigt werden.
+                                  </span>
+                                </li>
+
+                                <li>
+                                  <span class="rule">
+                                    Vor der Fortsetzung des nächsten
+                                    aufgezeichneten Teils müssen dieselben
+                                    Informationen erneut gezeigt werden.
+                                  </span>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </details>
+                      </li>
+
+                      <!-- Einzelrennen / IL Runs -->
+
+                      <li>
+                        <details open>
+                          <summary>Einzelrennen-Runs (IL)</summary>
+
+                          <ul>
+                            <li>
+                              <span class="rule">
+                                Für die Zeitmessung wird die Spielzeit
+                                verwendet (IGT).
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Die eingereichte Zeit muss mit dem Ergebnis
+                                übereinstimmen, das am Ende des Rennens
+                                angezeigt wird.
+                              </span>
+                            </li>
+                          </ul>
+                        </details>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Forza Speedrunning Community</p>
+    </footer>
+
+    <script>
+      /*
+        Only English and German are active for now because
+        those translation pages currently exist.
+      */
+
+      const supportedLanguages = ["en", "de", "fr"];
+      const languageSelector = document.getElementById("language");
+
+      languageSelector.value = document.documentElement.lang;
+
+      languageSelector.addEventListener("change", function () {
+        const selectedLanguage = languageSelector.value;
+        const pathParts = window.location.pathname.split("/");
+
+        const languagePosition = pathParts.findIndex(function (folder) {
+          return supportedLanguages.includes(folder);
+        });
+
+        if (languagePosition === -1) {
+          console.error(
+            "Im aktuellen Pfad wurde kein Sprachordner gefunden."
+          );
+
+          return;
+        }
+
+        pathParts[languagePosition] = selectedLanguage;
+
+        const newAddress =
+          pathParts.join("/") +
+          window.location.search +
+          window.location.hash;
+
+        window.location.href = newAddress;
+      });
+    </script>
+  </body>
+</html>

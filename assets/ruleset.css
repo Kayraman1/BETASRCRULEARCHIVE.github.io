@@ -1,0 +1,22 @@
+.language-switcher {
+  display: flex;
+  gap: 6px;
+}
+
+.language-switcher a {
+  padding: 7px 10px;
+
+  color: #ffffff;
+  text-decoration: none;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.language-switcher a:hover {
+  border-color: #e94b35;
+}
+
+.language-switcher a[aria-current="page"] {
+  background: #e94b35;
+  border-color: #e94b35;
+}

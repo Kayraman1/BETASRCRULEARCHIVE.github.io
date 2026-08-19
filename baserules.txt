@@ -1,0 +1,98 @@
+Ruleset:
+
+General Rules:
+    - All Runs need Videos as verification
+	- Videos have to be securely hosted (we recommend Youtube,Twitch VODS)
+	- If the Video is no longer available the Run will get rejected we do not work with "video exsistet once)
+	- If the Mods decide that you run is invalid even after a re-evaluation any kind of further dms/spams will not be answered
+	- Sound During Runs is Required
+	
+Forza Motorsport:
+    Forza Motorsport [2005]
+	    Full Game Runs:
+		    -Any Difficulty Settings are allowed
+			-any upgrades and tunings are allowed
+			-Pausing and Menuing will count towards final time
+			All Races:
+			    -Timing Starts with the Press of the Start race button and ends with the last frame of where you control your car on the last race
+				-You May use your Garage Cars if the Game lets you
+				-Timing is in RTA
+			Series Runs:
+			    -Timing Starts with the Press of the Start race button and ends with the last frame of where you control your car on the last race of the Specific Series.
+				-Timing is in RTA
+			Time Trials:
+			    -Timing is In IGT
+				-Time is the Time time the game shows you at the end of the Time Trials
+			Career Runs:
+			    -Unlock [Category] Runs are in RTA starting from the Button Press where you select your Profiles Name
+				-Unlock [Category] Runs end with the Screen Showing the [Category] has been Unlocked
+				-Career Any% runs start with the Button Press where you select your Profiles Name and end with the last frame of the last Career Races
+				-Career Any% timing is in RTA
+				-Career runs can be done in Multiple Parts. If done in Multiple Parts a Timer is Required and before unpausing the Timer for the next Part the Runner has to show in this way:
+				    - Before Pausing Run the Runner has to show his Garage and Money and also before Unpausing the Timer on his run.
+			Career Category Runs:
+			    -Timing is in RTA
+				-Time Starts with the Press of the Start race button of that Categories First Race ( for example Career[P2P] - Club 911 Event ) and end of the Last Race
+				- Exceptiong are the Endurance Categories for those as theyre a single Race the Timing is in IGT, and time is the Time shown at the End of the Race
+		
+		IL Runs:
+		    -Timing is in IGT
+			-Time for Run is Time shown at the End of the Race
+
+    Forza Motorsport 2 [2007]
+        Fulle Game Runs:
+		    -Any Difficulty Settings are allowed
+			-any upgrades and tunings are allowed
+			-Pausing and Menuing will count towards final time
+			All Races:
+			    -Timing Starts with the Press of the Start race button and ends with the last frame of where you control your car on the last race
+				-You May use your Garage Cars if the Game lets you
+				-Timing is in RTA
+			Time Trials:
+			    -Timing is in IGT
+				-Time is in the Time the game shows you at the end of the Time Trials
+			Career Runs:
+			    -Timing Starts with the Start Race button of the First Race and ends with the Last Race
+				-Timing is in RTA
+			Career Any%:
+			    -Timing in in RTA
+				-Timing Starts upon the creation of a fresh Save
+				-Career Any% runs can be done in Multiple Parts. If done in Multiple Parts a Timer is Required and before unpausing the Timer for the next Part the Runner has to show in this way:
+				    - Before Pausing Run the Runner has to show his Garage and Money and also before Unpausing the Timer on his run.
+			Career Category Runs:
+			    -Timing is in RTA
+				-Time Starts with the Press of the Start race button of that Categories First Race ( for example Proving Grounds-Flyweight Invitational ) and end of the Last Race
+				- Exceptiong are the Endurance Categories for those as theyre a single Race the Timing is in IGT, and time is the Time shown at the End of the Race
+				
+		IL Runs:
+		    -Timing is in IGT
+			-Time for Run is Time shown at the End of the Race
+			
+	Forza Motorsport 3 [2009]
+	    Full Game Runs:
+		    -Any Difficulty Settings are Allowed
+			-Any Upgrades and Tunings are allowed
+			-Pausing and Menuing will count towards Final Time
+			Seasonal Runs:
+			    -Timing Starts Upon the Creation of the New Save.
+				-Tming Ends upon the Finish of the According Year
+				-Timing is in RTA
+			All Races:
+			    -Timing Starts with the Press of the Start race button and ends with the last frame of where you control your car on the last race
+				-You May use your Garage Cars if the Game lets you
+				-Timing is in RTA
+			Career Any%:
+			    -Timing in in RTA
+				-Timing Starts upon the creation of a fresh Save
+				-Career Any% runs can be done in Multiple Parts. If done in Multiple Parts a Timer is Required and before unpausing the Timer for the next Part the Runner has to show in this way:
+				    - Before Pausing Run the Runner has to show his Garage and Money and also before Unpausing the Timer on his run.
+			Career Runs:
+			    -Timing Starts with the Start Race button of the First Race and ends with the Last Race
+				-Timing is in RTA
+			Career Category Runs:
+			    -Timing is in RTA
+				-Time Starts with the Press of the Start race button of that Categories First Race ( for example Drag Race Runs-250 FWD Shootout ) and end of the Last Race
+				- Exceptiong are the Endurance Categories for those as theyre a single Race the Timing is in IGT, and time is the Time shown at the End of the Race
+            Prolgue Race:
+          		-Run Starts with Entering the Prologue Race
+				-Ends upon Finishing it

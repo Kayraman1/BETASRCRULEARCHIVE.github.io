@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Forza Horizon [2012] Rules</title>
+
+    <style>
+      :root {
+        --background-image: url("../../images/forza-horizon-2012.jpg");
+
+        --text: #ffffff;
+        --muted-text: #c2c7cf;
+        --tree-lines: rgba(255, 255, 255, 0.3);
+        --accent: #e94b35;
+        --panel: rgba(8, 10, 13, 0.78);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: #080a0d;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+
+        color: var(--text);
+        font-family:
+          Consolas,
+          "Courier New",
+          monospace;
+      }
+
+      .page-background {
+        position: fixed;
+        z-index: -2;
+        inset: -10px;
+
+        background-image: var(--background-image);
+        background-position: center;
+        background-size: cover;
+
+        filter: blur(2px);
+        transform: scale(1.03);
+      }
+
+      .page-overlay {
+        position: fixed;
+        z-index: -1;
+        inset: 0;
+
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(5, 7, 10, 0.7),
+            rgba(5, 7, 10, 0.9)
+          );
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 30px;
+
+        min-height: 70px;
+        padding: 16px 5%;
+
+        background: rgba(5, 7, 10, 0.82);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+        backdrop-filter: blur(8px);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      header a {
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      header a:hover {
+        color: var(--accent);
+      }
+
+      .language-selector {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .language-selector label {
+        width: auto;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .language-selector select {
+        width: auto;
+        min-width: 130px;
+        padding: 8px 12px;
+
+        background: rgba(10, 12, 16, 0.85);
+        color: #ffffff;
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+      }
+
+      .language-selector select:focus {
+        border-color: var(--accent);
+        outline: 2px solid rgba(233, 75, 53, 0.25);
+      }
+
+      .language-selector option:disabled {
+        color: #777b82;
+      }
+
+      main {
+        width: min(1200px, 90%);
+        margin: 60px auto;
+      }
+
+      .rules-heading {
+        margin-bottom: 30px;
+      }
+
+      .rules-heading p {
+        margin: 0 0 10px;
+
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .rules-heading h2 {
+        margin: 0;
+
+        font-size: clamp(35px, 6vw, 70px);
+        line-height: 1;
+      }
+
+      .rules-heading span {
+        display: block;
+        margin-top: 16px;
+
+        color: var(--muted-text);
+        line-height: 1.6;
+      }
+
+      .rules-panel {
+        padding: clamp(20px, 4vw, 50px);
+
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.17);
+
+        backdrop-filter: blur(7px);
+      }
+
+      .rule-tree,
+      .rule-tree ul {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      .rule-tree ul {
+        margin: 5px 0 5px 8px;
+        padding-left: 28px;
+
+        border-left: 1px solid var(--tree-lines);
+      }
+
+      .rule-tree li {
+        position: relative;
+        padding: 5px 0;
+      }
+
+      .rule-tree ul > li::before {
+        position: absolute;
+        top: 17px;
+        left: -28px;
+
+        width: 18px;
+        border-top: 1px solid var(--tree-lines);
+
+        content: "";
+      }
+
+      summary {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+
+        width: fit-content;
+
+        color: var(--text);
+        font-weight: bold;
+
+        cursor: pointer;
+        user-select: none;
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      summary::before {
+        color: var(--accent);
+        content: "▶";
+
+        font-size: 10px;
+        transition: transform 150ms ease;
+      }
+
+      details[open] > summary::before {
+        transform: rotate(90deg);
+      }
+
+      summary:hover {
+        color: var(--accent);
+      }
+
+      .rule {
+        display: block;
+
+        color: #f3f3f3;
+        line-height: 1.55;
+      }
+
+      .important {
+        color: #ffb5a7;
+      }
+
+      footer {
+        padding: 30px 5%;
+
+        background: rgba(5, 7, 10, 0.85);
+        color: var(--muted-text);
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      @media (max-width: 750px) {
+        header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        main {
+          width: 94%;
+          margin: 35px auto;
+        }
+
+        .rule-tree ul {
+          margin-left: 3px;
+          padding-left: 18px;
+        }
+
+        .rule-tree ul > li::before {
+          left: -18px;
+          width: 11px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        summary::before {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-background" aria-hidden="true"></div>
+    <div class="page-overlay" aria-hidden="true"></div>
+
+    <header>
+      <h1>Forza Speedrunning Community</h1>
+
+      <a href="../../index.html">← Back to archive</a>
+
+      <div class="language-selector">
+        <label for="language">Language</label>
+
+        <select id="language">
+          <option value="en" selected>English</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="ja">日本語</option>
+          <option value="ru">Русский</option>
+        </select>
+      </div>
+    </header>
+
+    <main>
+      <section class="rules-heading">
+        <p>Official community ruleset</p>
+
+        <h2>Forza Horizon [2012]</h2>
+
+        <span>
+          Select a heading to open or close that part of the rule tree.
+        </span>
+      </section>
+
+      <section class="rules-panel">
+        <ul class="rule-tree">
+          <!-- General Rules -->
+
+          <li>
+            <details open>
+              <summary>General Rules</summary>
+
+              <ul>
+                <li>
+                  <span class="rule">
+                    All runs require a complete video for verification.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    The video must remain permanently accessible to
+                    the Mod Team.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    Public or unlisted YouTube videos, Twitch Highlights,
+                    and other permanent video-hosting sites are allowed.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule important">
+                    Twitch VODs, private YouTube videos, TikTok videos,
+                    Xbox Clips, mega.nz links, and other temporary or
+                    file-sharing services are not allowed.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule important">
+                    If the video becomes unavailable, the run will be
+                    rejected. Evidence that the video was previously
+                    available will not be accepted.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    All runs must include in-game sound. Silent runs
+                    will be rejected.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    The full HUD must remain enabled throughout the run.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    The Replay feature cannot be used as a recording
+                    method. Runs recorded using Replay will be rejected.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule important">
+                    The use of mods in any form during runs is strictly forbidden.
+                    This includes modifying the game or using mods to
+                    obtain additional items or currency.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    Listing the car and tune used in the run description
+                    is recommended, but not required.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    The Mod Team reserves the right to request details
+                    about the car and tune used.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    If a run is declared invalid after re-evaluation,
+                    the decision is final. Further direct messages or
+                    spam concerning the decision will not be answered.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    Track cuts are allowed. Checkpoints are the only
+                    enforced track limits.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    All DLC and additional content are allowed unless
+                    stated otherwise in the category rules.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    The order in which events, races, stunts, and other
+                    objectives are completed is left to the runner unless
+                    specified otherwise.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    Additional overlays using the game’s Data Out feature
+                    are allowed if the game supports it.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    The submitted platform must be set to PC when Data Out
+                    overlays are used.
+                  </span>
+                </li>
+
+                <li>
+                  <span class="rule">
+                    All difficulty settings are allowed except Assisted
+                    Braking, Assisted Steering, Auto-Steering from Forza
+                    Horizon 5 onward, and ANNA’s Auto Drive.
+                  </span>
+                <li>
+                  <span class="rule">
+                    All Kind of Runs using Seasonal Aspects will be rejected. 
+					The Exception is Showcase Remixes or Seasonal Events 
+					which you cannot opt out of.
+                  </span>
+                </li>
+              </ul>
+            </details>
+          </li>
+
+          <!-- Game-Specific Rules -->
+
+          <li>
+            <details open>
+              <summary>Forza Horizon</summary>
+
+              <ul>
+                <li>
+                  <details open>
+                    <summary>Forza Horizon [2012]</summary>
+
+                    <ul>
+                      <!-- Full Game Runs -->
+
+                      <li>
+                        <details open>
+                          <summary>Full Game Runs</summary>
+
+                          <ul>
+                            <li>
+                              <span class="rule">
+                                Any difficulty settings are allowed.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Any upgrades and tunings are allowed.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Pausing and opening menus count toward
+                                the final time.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                For runs longer than 4 hours, the runner
+                                may take a total break of up to 1 hour.
+                                This may be taken all at once or split
+                                into multiple breaks.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                For runs longer than 10 hours, the runner
+                                may take a total break of up to 2.5 hours.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Rewinds are allowed and count toward the
+                                final time.
+                              </span>
+                            </li>
+
+                            <!-- Any% -->
+
+                            <li>
+                              <details>
+                                <summary>Any%</summary>
+
+                                <ul>
+                                  <li>
+                                    <span class="rule">
+                                      Timing starts when the Singleplayer
+                                      button is clicked.
+                                    </span>
+                                  </li>
+
+                                  <li>
+                                    <span class="rule">
+                                      Timing ends on the frame where the
+                                      player loses control of their car
+                                      after defeating Darius Flynt.
+                                    </span>
+                                  </li>
+
+                                  <li>
+                                    <span class="rule">
+                                      Timing is measured using real time
+                                      (RTA).
+                                    </span>
+                                  </li>
+                                </ul>
+                              </details>
+                            </li>
+
+                            <!-- Horizon Rally -->
+
+                            <li>
+                              <details>
+                                <summary>Horizon Rally</summary>
+
+                                <ul>
+                                  <li>
+                                    <span class="rule">
+                                      Timing starts when the Singleplayer
+                                      button is clicked.
+                                    </span>
+                                  </li>
+
+                                  <li>
+                                    <span class="rule">
+                                      Timing ends on the frame where the
+                                      final race of the Horizon Rally DLC
+                                      is completed.
+                                    </span>
+                                  </li>
+
+                                  <li>
+                                    <span class="rule">
+                                      Timing is measured using real time
+                                      (RTA).
+                                    </span>
+                                  </li>
+                                </ul>
+                              </details>
+                            </li>
+
+                            <!-- 100% -->
+
+                            <li>
+                              <details>
+                                <summary>100%</summary>
+
+                                <ul>
+                                  <li>
+                                    <span class="rule">
+                                      Timing starts when the Singleplayer
+                                      button is clicked.
+                                    </span>
+                                  </li>
+
+                                  <li>
+                                    <span class="rule">
+                                      Timing ends when the final event
+                                      required for 100% is completed.
+                                    </span>
+                                  </li>
+
+                                  <li>
+                                    <span class="rule">
+                                      Timing is measured using real time
+                                      (RTA).
+                                    </span>
+                                  </li>
+
+                                  <li>
+                                    <span class="rule">
+                                      100% requires all Festival Races,
+                                      Street Races, Star Showdowns,
+                                      Showcase Events, and PR Stunts
+                                      to be completed.
+                                    </span>
+                                  </li>
+                                </ul>
+                              </details>
+                            </li>
+
+                            <!-- All Showcase Events -->
+
+                            <li>
+                              <details>
+                                <summary>All Showcase Events</summary>
+
+                                <ul>
+                                  <li>
+                                    <span class="rule">
+                                      Timing starts when the Start Race
+                                      button is pressed for the first
+                                      Showcase Event.
+                                    </span>
+                                  </li>
+
+                                  <li>
+                                    <span class="rule">
+                                      Timing ends when the final Showcase
+                                      Event is completed.
+                                    </span>
+                                  </li>
+
+                                  <li>
+                                    <span class="rule">
+                                      Resetting the game or using a new
+                                      save is not required.
+                                    </span>
+                                  </li>
+
+                                  <li>
+                                    <span class="rule">
+                                      Timing is measured using real time
+                                      (RTA).
+                                    </span>
+                                  </li>
+                                </ul>
+                              </details>
+                            </li>
+                          </ul>
+                        </details>
+                      </li>
+
+                      <!-- Individual Races -->
+
+                      <li>
+                        <details open>
+                          <summary>Individual Races</summary>
+
+                          <ul>
+                            <li>
+                              <span class="rule">
+                                Track cuts are allowed. Checkpoints are
+                                the only enforced track limits.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Rewinds are not allowed.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                Timing uses in-game time (IGT).
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                The final time is the time shown by the
+                                game after completing the race.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                The final time must be shown at the end
+                                of the submitted video.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                The car’s class must be visible at some
+                                point during the run for verification.
+                              </span>
+                            </li>
+
+                            <li>
+                              <span class="rule">
+                                The car’s class may be shown in the
+                                pre-race menus or on the post-race
+                                leaderboard.
+                              </span>
+                            </li>
+                          </ul>
+                        </details>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Forza Speedrunning Community</p>
+    </footer>
+
+    <script>
+      const supportedLanguages = [
+        "en",
+        "de",
+        "fr",
+        "es",
+        "ja",
+        "ru"
+      ];
+
+      const languageSelector =
+        document.getElementById("language");
+
+      languageSelector.value =
+        document.documentElement.lang;
+
+      languageSelector.addEventListener("change", function () {
+        const selectedLanguage = languageSelector.value;
+        const pathParts = window.location.pathname.split("/");
+
+        const languagePosition = pathParts.findIndex(
+          function (folder) {
+            return supportedLanguages.includes(folder);
+          }
+        );
+
+        if (languagePosition === -1) {
+          console.error(
+            "No language folder was found in the current address."
+          );
+
+          return;
+        }
+
+        pathParts[languagePosition] = selectedLanguage;
+
+        const newAddress =
+          pathParts.join("/") +
+          window.location.search +
+          window.location.hash;
+
+        window.location.href = newAddress;
+      });
+    </script>
+  </body>
+</html>

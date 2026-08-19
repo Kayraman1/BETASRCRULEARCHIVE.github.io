@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Forza Speedrunning Community</title>
+
+    <style>
+      :root {
+        --background: #090b0e;
+        --background-light: #0d1015;
+        --panel: #15191f;
+        --panel-hover: #191e25;
+
+        --text: #f5f5f5;
+        --muted-text: #aeb4bd;
+
+        --border: #2a3039;
+        --accent: #e94b35;
+        --accent-hover: #ff6048;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+
+        background:
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(233, 75, 53, 0.08),
+            transparent 30%
+          ),
+          var(--background);
+
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      /*
+        Header
+      */
+
+      header {
+        position: sticky;
+        z-index: 10;
+        top: 0;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        min-height: 72px;
+        padding: 0 5%;
+
+        background: rgba(9, 11, 14, 0.9);
+        border-bottom: 1px solid var(--border);
+
+        backdrop-filter: blur(12px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+
+        width: 40px;
+        height: 40px;
+
+        background: var(--accent);
+        color: #ffffff;
+
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.05em;
+
+        transform: skewX(-7deg);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      nav {
+        display: flex;
+        gap: 24px;
+      }
+
+      nav a {
+        position: relative;
+        padding: 26px 0;
+
+        color: #ffffff;
+
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      nav a::after {
+        position: absolute;
+        right: 0;
+        bottom: -1px;
+        left: 0;
+
+        height: 2px;
+
+        background: var(--accent);
+
+        content: "";
+        transform: scaleX(0);
+        transition: transform 150ms ease;
+      }
+
+      nav a:hover {
+        color: var(--accent-hover);
+      }
+
+      nav a:hover::after {
+        transform: scaleX(1);
+      }
+
+      /*
+        Hero
+
+        Upper 1/3: image
+        Lower 2/3: dark introduction area
+      */
+
+      .hero {
+        display: grid;
+        grid-template-rows: 1fr 2fr;
+
+        min-height: calc(100vh - 72px);
+        overflow: hidden;
+      }
+
+      .hero-image {
+        position: relative;
+        min-height: 200px;
+
+        background-image:
+          linear-gradient(
+            to bottom,
+            rgba(9, 11, 14, 0.1),
+            rgba(9, 11, 14, 0.6)
+          ),
+          url("https://i.imgur.com/H5rLhqW.png");
+
+        background-position: center;
+        background-size: cover;
+
+        filter: blur(1px);
+        transform: scale(1.02);
+      }
+
+      .hero-content {
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        min-height: 400px;
+        padding: 60px 8%;
+
+        background:
+          linear-gradient(
+            120deg,
+            #0d1015 0%,
+            #0d1015 65%,
+            #12151a 100%
+          );
+      }
+
+      .hero-content::before {
+        width: 60px;
+        height: 4px;
+        margin-bottom: 24px;
+
+        background: var(--accent);
+
+        content: "";
+      }
+
+      .eyebrow,
+      .section-label {
+        margin: 0 0 14px;
+
+        color: var(--accent);
+
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .hero-content h2 {
+        max-width: 750px;
+        margin: 0 0 18px;
+
+        font-size: clamp(42px, 7vw, 90px);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      .hero-description {
+        max-width: 650px;
+        margin: 0;
+
+        color: var(--muted-text);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+
+      /*
+        Board and ruleset sections
+      */
+
+      main > section:not(.hero) {
+        padding: 90px 8%;
+        border-top: 1px solid var(--border);
+        scroll-margin-top: 72px;
+      }
+
+      #boards {
+        background: rgba(9, 11, 14, 0.92);
+      }
+
+      #rulesets {
+        background: var(--background-light);
+      }
+
+      main h2 {
+        margin: 0 0 14px;
+
+        font-size: clamp(38px, 5vw, 58px);
+        letter-spacing: -0.03em;
+      }
+
+      .section-description {
+        max-width: 650px;
+        margin: 0;
+
+        color: var(--muted-text);
+        font-size: 17px;
+        line-height: 1.6;
+      }
+
+      .language-note {
+        display: inline-block;
+        margin: 16px 0 0;
+        padding: 8px 11px;
+
+        background: rgba(233, 75, 53, 0.1);
+        color: #ffb5a7;
+
+        border: 1px solid rgba(233, 75, 53, 0.3);
+
+        font-size: 12px;
+      }
+
+      /*
+        Selection cards
+      */
+
+      .selector {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+
+        max-width: 780px;
+        margin-top: 32px;
+        padding: 24px;
+
+        background: rgba(21, 25, 31, 0.8);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--accent);
+
+        transition:
+          background 150ms ease,
+          border-color 150ms ease;
+      }
+
+      .selector:hover {
+        background: var(--panel-hover);
+        border-color: #3a424d;
+        border-left-color: var(--accent);
+      }
+
+      .selector label {
+        grid-column: 1 / -1;
+
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      select {
+        width: 100%;
+        min-width: 0;
+        padding: 14px 16px;
+
+        background: #0e1116;
+        color: #ffffff;
+
+        border: 1px solid #3b424d;
+        border-radius: 3px;
+
+        font-size: 16px;
+
+        cursor: pointer;
+      }
+
+      select:hover {
+        border-color: #596270;
+      }
+
+      select:focus {
+        border-color: var(--accent);
+        outline: 2px solid rgba(233, 75, 53, 0.25);
+      }
+
+      button {
+        min-width: 150px;
+        padding: 14px 24px;
+
+        background: var(--accent);
+        color: #ffffff;
+
+        border: 0;
+        border-radius: 3px;
+
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+
+        cursor: pointer;
+
+        transition:
+          background 150ms ease,
+          transform 150ms ease;
+      }
+
+      button:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+      }
+
+      /*
+        Footer
+      */
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        padding: 30px 8%;
+
+        background: #060709;
+        color: #7f8792;
+
+        border-top: 1px solid var(--border);
+
+        font-size: 12px;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      /*
+        Mobile layout
+      */
+
+      @media (max-width: 700px) {
+        header {
+          position: relative;
+
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 14px;
+
+          padding-top: 18px;
+          padding-bottom: 18px;
+        }
+
+        nav {
+          width: 100%;
+        }
+
+        nav a {
+          padding: 8px 0;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+
+        .hero-content {
+          min-height: 450px;
+          padding: 50px 6%;
+        }
+
+        main > section:not(.hero) {
+          padding: 65px 6%;
+        }
+
+        .selector {
+          grid-template-columns: 1fr;
+          padding: 18px;
+        }
+
+        .selector label {
+          grid-column: auto;
+        }
+
+        button {
+          width: 100%;
+        }
+
+        footer {
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        nav a::after,
+        .selector,
+        button {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="brand">
+        <img
+            class="brand-logo"
+            src="images/fsc-logo.png"
+            alt="PLACEHOLDER"
+        >
+        <h1>Forza Speedrunning Community</h1>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="#boards">Boards</a>
+        <a href="#rulesets">Rulesets</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div
+          class="hero-image"
+          role="img"
+          aria-label="Forza racing cars on a track"
+        ></div>
+
+        <div class="hero-content">
+          <p class="eyebrow">Community rules archive</p>
+
+          <h2>Find the rules for your run</h2>
+
+          <p class="hero-description">
+            Choose a game board or open its translated ruleset.
+            The archive covers both the Forza Motorsport and
+            Forza Horizon series.
+          </p>
+        </div>
+      </section>
+
+      <!-- Board selection -->
+
+      <section id="boards">
+        <p class="section-label">01 / Boards</p>
+
+        <h2>Speedrunning boards</h2>
+
+        <p class="section-description">
+          Select a game to open its speedrun.com leaderboard.
+        </p>
+
+        <form class="selector" id="board-selector">
+          <label for="board-game">Select a game board</label>
+
+          <select id="board-game" required>
+            <option value="" selected disabled>
+              Choose a game
+            </option>
+
+            <optgroup label="Forza Motorsport Series">
+              <option value="https://www.speedrun.com/fm1">
+                Forza Motorsport [2005]
+              </option>
+
+              <option value="https://www.speedrun.com/fm2">
+                Forza Motorsport 2 [2007]
+              </option>
+
+              <option value="https://www.speedrun.com/forza_motorsport_3">
+                Forza Motorsport 3 [2009]
+              </option>
+
+              <option value="https://www.speedrun.com/fm4">
+                Forza Motorsport 4 [2011]
+              </option>
+
+              <option value="https://www.speedrun.com/fm5">
+                Forza Motorsport 5 [2013]
+              </option>
+
+              <option value="https://www.speedrun.com/fm6">
+                Forza Motorsport 6 [2015]
+              </option>
+
+              <option value="https://www.speedrun.com/fm7">
+                Forza Motorsport 7 [2017]
+              </option>
+
+              <option value="https://www.speedrun.com/fm_2023">
+                Forza Motorsport [2023]
+              </option>
+            </optgroup>
+
+            <optgroup label="Forza Horizon Series">
+              <!-- Replace these placeholders with speedrun.com links. -->
+
+              <option value="https://www.speedrun.com/fh1">
+                Forza Horizon [2012]
+              </option>
+
+              <option value="https://www.speedrun.com/fh2_xbox360">
+                Forza Horizon 2 X360 [2014]
+              </option>
+			  
+		      <option value="https://www.speedrun.com/fh2">
+                Forza Horizon 2 XONE [2014]
+              </option>
+
+              <option value="https://www.speedrun.com/fh3">
+                Forza Horizon 3 [2016]
+              </option>
+
+              <option value="https://www.speedrun.com/fh4">
+                Forza Horizon 4 [2018]
+              </option>
+
+              <option value="https://www.speedrun.com/fh5">
+                Forza Horizon 5 [2021]
+              </option>
+
+              <option value="https://www.speedrun.com/fh6">
+                Forza Horizon 6 [2026]
+              </option>
+            </optgroup>
+          </select>
+
+          <button type="submit">Open board →</button>
+        </form>
+      </section>
+
+      <!-- Ruleset selection -->
+
+      <section id="rulesets">
+        <p class="section-label">02 / Rulesets</p>
+
+        <h2>Community rulesets</h2>
+
+        <p class="section-description">
+          Select a game to open its complete translated ruleset.
+        </p>
+
+        <p class="language-note">
+          Default language: English. Language can be changed
+          from within each ruleset.
+        </p>
+
+        <form class="selector" id="ruleset-selector">
+          <label for="ruleset-game">Select a ruleset</label>
+
+          <select id="ruleset-game" required>
+            <option value="" selected disabled>
+              Choose a ruleset
+            </option>
+
+            <optgroup label="Forza Motorsport Series">
+              <option
+                value="rulesets/en/forza-motorsport-2005.html"
+              >
+                Forza Motorsport [2005] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-2.html"
+              >
+                Forza Motorsport 2 [2007] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-3.html"
+              >
+                Forza Motorsport 3 [2009] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-4.html"
+              >
+                Forza Motorsport 4 [2011] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-5.html"
+              >
+                Forza Motorsport 5 [2013] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-6.html"
+              >
+                Forza Motorsport 6 [2015] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-7.html"
+              >
+                Forza Motorsport 7 [2017] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-2023.html"
+              >
+                Forza Motorsport [2023] Rules
+              </option>
+            </optgroup>
+
+            <optgroup label="Forza Horizon Series">
+              <option value="rulesets/en/forza-horizon.html">
+                Forza Horizon [2012] Rules
+              </option>
+
+              <option value="rulesets/en/forza-horizon-2.html">
+                Forza Horizon 2 [2014] Rules
+              </option>
+
+              <option value="rulesets/en/forza-horizon-3.html">
+                Forza Horizon 3 [2016] Rules
+              </option>
+
+              <option value="rulesets/en/forza-horizon-4.html">
+                Forza Horizon 4 [2018] Rules
+              </option>
+
+              <option value="rulesets/en/forza-horizon-5.html">
+                Forza Horizon 5 [2021] Rules
+              </option>
+
+              <option value="rulesets/en/forza-horizon-6.html">
+                Forza Horizon 6 [2026] Rules
+              </option>
+            </optgroup>
+          </select>
+
+          <button type="submit">Open ruleset →</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>Forza Speedrunning Community</p>
+      <p>Community-maintained rules archive</p>
+    </footer>
+
+    <script>
+      function openSelectedLink(event, selectId) {
+        event.preventDefault();
+
+        const dropdown = document.getElementById(selectId);
+        const selectedLink = dropdown.value;
+
+        if (selectedLink) {
+          window.location.href = selectedLink;
+        }
+      }
+
+      document
+        .getElementById("board-selector")
+        .addEventListener("submit", function (event) {
+          openSelectedLink(event, "board-game");
+        });
+
+      document
+        .getElementById("ruleset-selector")
+        .addEventListener("submit", function (event) {
+          openSelectedLink(event, "ruleset-game");
+        });
+    </script>
+  </body>
+</html>
