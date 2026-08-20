@@ -8,15 +8,20 @@
 
     <style>
       :root {
+        --background-image: url("https://i.imgur.com/H5rLhqW.png");
+
         --background: #090b0e;
-        --background-light: #0d1015;
-        --panel: #15191f;
+        --background-light: rgba(13, 16, 21, 0.94);
+        --panel: rgba(8, 10, 13, 0.78);
+        --panel-solid: #15191f;
         --panel-hover: #191e25;
 
         --text: #f5f5f5;
         --muted-text: #aeb4bd;
 
-        --border: #2a3039;
+        --border: rgba(255, 255, 255, 0.17);
+        --tree-lines: rgba(255, 255, 255, 0.3);
+
         --accent: #e94b35;
         --accent-hover: #ff6048;
       }
@@ -26,22 +31,51 @@
       }
 
       html {
+        background: var(--background);
         scroll-behavior: smooth;
       }
 
       body {
+        min-height: 100vh;
         margin: 0;
 
-        background:
-          radial-gradient(
-            circle at 80% 20%,
-            rgba(233, 75, 53, 0.08),
-            transparent 30%
-          ),
-          var(--background);
-
+        background: transparent;
         color: var(--text);
-        font-family: Arial, Helvetica, sans-serif;
+
+        font-family:
+          Consolas,
+          "Courier New",
+          monospace;
+      }
+
+      /*
+        Blurred page background
+      */
+
+      .page-background {
+        position: fixed;
+        z-index: -2;
+        inset: -10px;
+
+        background-image: var(--background-image);
+        background-position: center;
+        background-size: cover;
+
+        filter: blur(3px);
+        transform: scale(1.03);
+      }
+
+      .page-overlay {
+        position: fixed;
+        z-index: -1;
+        inset: 0;
+
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(5, 7, 10, 0.82),
+            rgba(5, 7, 10, 0.96)
+          );
       }
 
       /*
@@ -56,11 +90,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 30px;
 
         min-height: 72px;
-        padding: 0 5%;
+        padding: 12px 5%;
 
-        background: rgba(9, 11, 14, 0.9);
+        background: rgba(5, 7, 10, 0.86);
         border-bottom: 1px solid var(--border);
 
         backdrop-filter: blur(12px);
@@ -72,30 +107,26 @@
         gap: 12px;
       }
 
-      .brand-mark {
-        display: grid;
-        place-items: center;
+      .brand-logo {
+        display: block;
 
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
 
-        background: var(--accent);
-        color: #ffffff;
+        object-fit: contain;
 
-        font-size: 11px;
-        font-weight: 900;
-        letter-spacing: 0.05em;
-
-        transform: skewX(-7deg);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border);
       }
 
       header h1 {
         margin: 0;
-        font-size: 20px;
+        font-size: 18px;
       }
 
       nav {
         display: flex;
+        flex-wrap: wrap;
         gap: 24px;
       }
 
@@ -103,9 +134,9 @@
         position: relative;
         padding: 26px 0;
 
-        color: #ffffff;
+        color: var(--text);
 
-        font-size: 14px;
+        font-size: 13px;
         font-weight: bold;
         text-decoration: none;
       }
@@ -135,9 +166,6 @@
 
       /*
         Hero
-
-        Upper 1/3: image
-        Lower 2/3: dark introduction area
       */
 
       .hero {
@@ -150,15 +178,15 @@
 
       .hero-image {
         position: relative;
-        min-height: 200px;
+        min-height: 220px;
 
         background-image:
           linear-gradient(
             to bottom,
             rgba(9, 11, 14, 0.1),
-            rgba(9, 11, 14, 0.6)
+            rgba(9, 11, 14, 0.72)
           ),
-          url("https://i.imgur.com/H5rLhqW.png");
+          var(--background-image);
 
         background-position: center;
         background-size: cover;
@@ -180,10 +208,12 @@
         background:
           linear-gradient(
             120deg,
-            #0d1015 0%,
-            #0d1015 65%,
-            #12151a 100%
+            rgba(8, 10, 13, 0.98) 0%,
+            rgba(13, 16, 21, 0.96) 65%,
+            rgba(18, 21, 26, 0.94) 100%
           );
+
+        border-top: 1px solid var(--border);
       }
 
       .hero-content::before {
@@ -209,7 +239,7 @@
       }
 
       .hero-content h2 {
-        max-width: 750px;
+        max-width: 850px;
         margin: 0 0 18px;
 
         font-size: clamp(42px, 7vw, 90px);
@@ -218,30 +248,37 @@
       }
 
       .hero-description {
-        max-width: 650px;
+        max-width: 700px;
         margin: 0;
 
         color: var(--muted-text);
-        font-size: 18px;
+        font-size: 17px;
         line-height: 1.7;
       }
 
       /*
-        Board and ruleset sections
+        Main sections
       */
 
       main > section:not(.hero) {
         padding: 90px 8%;
+
         border-top: 1px solid var(--border);
         scroll-margin-top: 72px;
+
+        backdrop-filter: blur(7px);
       }
 
       #boards {
-        background: rgba(9, 11, 14, 0.92);
+        background: rgba(9, 11, 14, 0.9);
       }
 
       #rulesets {
         background: var(--background-light);
+      }
+
+      #community {
+        background: rgba(9, 11, 14, 0.92);
       }
 
       main h2 {
@@ -252,12 +289,12 @@
       }
 
       .section-description {
-        max-width: 650px;
+        max-width: 720px;
         margin: 0;
 
         color: var(--muted-text);
-        font-size: 17px;
-        line-height: 1.6;
+        font-size: 16px;
+        line-height: 1.7;
       }
 
       .language-note {
@@ -274,7 +311,7 @@
       }
 
       /*
-        Selection cards
+        Board and ruleset selectors
       */
 
       .selector {
@@ -286,9 +323,11 @@
         margin-top: 32px;
         padding: 24px;
 
-        background: rgba(21, 25, 31, 0.8);
+        background: var(--panel);
         border: 1px solid var(--border);
         border-left: 4px solid var(--accent);
+
+        backdrop-filter: blur(7px);
 
         transition:
           background 150ms ease,
@@ -296,8 +335,8 @@
       }
 
       .selector:hover {
-        background: var(--panel-hover);
-        border-color: #3a424d;
+        background: rgba(25, 30, 37, 0.9);
+        border-color: rgba(255, 255, 255, 0.28);
         border-left-color: var(--accent);
       }
 
@@ -321,7 +360,8 @@
         border: 1px solid #3b424d;
         border-radius: 3px;
 
-        font-size: 16px;
+        font-family: inherit;
+        font-size: 15px;
 
         cursor: pointer;
       }
@@ -335,7 +375,7 @@
         outline: 2px solid rgba(233, 75, 53, 0.25);
       }
 
-      button {
+      .selector button {
         min-width: 150px;
         padding: 14px 24px;
 
@@ -345,6 +385,7 @@
         border: 0;
         border-radius: 3px;
 
+        font-family: inherit;
         font-size: 14px;
         font-weight: 900;
         letter-spacing: 0.04em;
@@ -356,9 +397,273 @@
           transform 150ms ease;
       }
 
-      button:hover {
+      .selector button:hover {
         background: var(--accent-hover);
         transform: translateY(-2px);
+      }
+
+      /*
+        FAQ and Mod Team slider
+      */
+
+      .info-slider {
+        max-width: 1200px;
+        margin-top: 38px;
+      }
+
+      .slider-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .slider-tab {
+        position: relative;
+
+        padding: 13px 20px;
+
+        background: rgba(14, 17, 22, 0.9);
+        color: var(--muted-text);
+
+        border: 1px solid var(--border);
+
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+
+        cursor: pointer;
+
+        transition:
+          color 150ms ease,
+          background 150ms ease,
+          border-color 150ms ease;
+      }
+
+      .slider-tab:hover {
+        color: var(--text);
+        border-color: rgba(255, 255, 255, 0.32);
+      }
+
+      .slider-tab.active {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+      }
+
+      .info-viewport {
+        overflow: hidden;
+
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--accent);
+
+        backdrop-filter: blur(8px);
+
+        transition: height 300ms ease;
+      }
+
+      .info-track {
+        display: flex;
+        align-items: flex-start;
+
+        transition: transform 350ms ease;
+      }
+
+      .info-slide {
+        flex: 0 0 100%;
+        width: 100%;
+        padding: clamp(24px, 5vw, 54px);
+      }
+
+      .slide-heading {
+        margin-bottom: 30px;
+      }
+
+      .slide-heading p {
+        margin: 0 0 10px;
+
+        color: var(--accent);
+
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .slide-heading h3 {
+        margin: 0 0 12px;
+
+        font-size: clamp(30px, 4vw, 46px);
+      }
+
+      .slide-heading span {
+        display: block;
+
+        max-width: 700px;
+
+        color: var(--muted-text);
+        line-height: 1.6;
+      }
+
+      /*
+        FAQ tree
+      */
+
+      .faq-list {
+        margin: 0;
+        padding: 0;
+
+        list-style: none;
+      }
+
+      .faq-list li {
+        position: relative;
+        padding-left: 28px;
+
+        border-left: 1px solid var(--tree-lines);
+      }
+
+      .faq-list li::before {
+        position: absolute;
+        top: 25px;
+        left: 0;
+
+        width: 18px;
+
+        border-top: 1px solid var(--tree-lines);
+
+        content: "";
+      }
+
+      .faq-list details {
+        padding: 14px 0;
+      }
+
+      .faq-list summary {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+
+        width: fit-content;
+
+        color: var(--text);
+        font-weight: bold;
+
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .faq-list summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq-list summary::before {
+        color: var(--accent);
+
+        content: "▶";
+
+        font-size: 10px;
+        transition: transform 150ms ease;
+      }
+
+      .faq-list details[open] > summary::before {
+        transform: rotate(90deg);
+      }
+
+      .faq-list summary:hover {
+        color: var(--accent-hover);
+      }
+
+      .faq-answer {
+        max-width: 850px;
+        margin: 14px 0 0 19px;
+
+        color: var(--muted-text);
+        line-height: 1.7;
+      }
+
+      /*
+        Mod Team cards
+      */
+
+      .mod-grid {
+        display: grid;
+        grid-template-columns:
+          repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+      }
+
+      .mod-card {
+        min-height: 105px;
+        padding: 19px;
+
+        background: rgba(14, 17, 22, 0.78);
+
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+
+        transition:
+          background 150ms ease,
+          transform 150ms ease,
+          border-color 150ms ease;
+      }
+
+      .mod-card:hover {
+        background: var(--panel-hover);
+        border-color: rgba(255, 255, 255, 0.28);
+        border-left-color: var(--accent);
+
+        transform: translateY(-2px);
+      }
+
+      .mod-card strong {
+        display: block;
+        margin-bottom: 8px;
+
+        color: var(--text);
+        font-size: 15px;
+        line-height: 1.35;
+      }
+
+      .mod-card span {
+        display: block;
+
+        color: var(--muted-text);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      /*
+        Legal disclaimer
+      */
+
+      .legal-disclaimer {
+        padding: 32px 8%;
+
+        background: rgba(5, 7, 10, 0.96);
+        color: #7f8792;
+
+        border-top: 1px solid var(--border);
+      }
+
+      .legal-disclaimer h2 {
+        margin: 0 0 9px;
+
+        color: #aeb4bd;
+
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .legal-disclaimer p {
+        max-width: 1100px;
+        margin: 0;
+
+        font-size: 11px;
+        line-height: 1.7;
       }
 
       /*
@@ -370,14 +675,14 @@
         justify-content: space-between;
         gap: 20px;
 
-        padding: 30px 8%;
+        padding: 24px 8%;
 
-        background: #060709;
-        color: #7f8792;
+        background: #040506;
+        color: #656c75;
 
         border-top: 1px solid var(--border);
 
-        font-size: 12px;
+        font-size: 11px;
       }
 
       footer p {
@@ -388,7 +693,7 @@
         Mobile layout
       */
 
-      @media (max-width: 700px) {
+      @media (max-width: 760px) {
         header {
           position: relative;
 
@@ -402,6 +707,7 @@
 
         nav {
           width: 100%;
+          gap: 18px;
         }
 
         nav a {
@@ -430,8 +736,34 @@
           grid-column: auto;
         }
 
-        button {
+        .selector button {
           width: 100%;
+        }
+
+        .slider-tabs {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .slider-tab {
+          width: 100%;
+          padding: 12px 8px;
+        }
+
+        .info-slide {
+          padding: 25px 18px;
+        }
+
+        .faq-list li {
+          padding-left: 18px;
+        }
+
+        .faq-list li::before {
+          width: 11px;
+        }
+
+        .mod-grid {
+          grid-template-columns: 1fr;
         }
 
         footer {
@@ -446,7 +778,12 @@
 
         nav a::after,
         .selector,
-        button {
+        .selector button,
+        .slider-tab,
+        .info-viewport,
+        .info-track,
+        .faq-list summary::before,
+        .mod-card {
           transition: none;
         }
       }
@@ -454,23 +791,30 @@
   </head>
 
   <body>
+    <div class="page-background" aria-hidden="true"></div>
+    <div class="page-overlay" aria-hidden="true"></div>
+
     <header>
       <div class="brand">
         <img
-            class="brand-logo"
-            src="images/fsc-logo.png"
-            alt="PLACEHOLDER"
+          class="brand-logo"
+          src="images/fsc-logo.png"
+          alt="FSC logo placeholder"
         >
+
         <h1>Forza Speedrunning Community</h1>
       </div>
 
       <nav aria-label="Main navigation">
         <a href="#boards">Boards</a>
         <a href="#rulesets">Rulesets</a>
+        <a href="#community">FAQ &amp; Team</a>
       </nav>
     </header>
 
     <main>
+      <!-- Hero -->
+
       <section class="hero" id="top">
         <div
           class="hero-image"
@@ -484,8 +828,8 @@
           <h2>Find the rules for your run</h2>
 
           <p class="hero-description">
-            Choose a game board or open its translated ruleset.
-            The archive covers both the Forza Motorsport and
+            Choose a Forza game board or open its community-maintained
+            ruleset. The archive covers both the Forza Motorsport and
             Forza Horizon series.
           </p>
         </div>
@@ -545,8 +889,6 @@
             </optgroup>
 
             <optgroup label="Forza Horizon Series">
-              <!-- Replace these placeholders with speedrun.com links. -->
-
               <option value="https://www.speedrun.com/fh1">
                 Forza Horizon [2012]
               </option>
@@ -554,8 +896,8 @@
               <option value="https://www.speedrun.com/fh2_xbox360">
                 Forza Horizon 2 X360 [2014]
               </option>
-			  
-		      <option value="https://www.speedrun.com/fh2">
+
+              <option value="https://www.speedrun.com/fh2">
                 Forza Horizon 2 XONE [2014]
               </option>
 
@@ -589,11 +931,12 @@
         <h2>Community rulesets</h2>
 
         <p class="section-description">
-          Select a game to open its complete translated ruleset.
+          Select a game to open its complete community-maintained
+          ruleset.
         </p>
 
         <p class="language-note">
-          Default language: English. Language can be changed
+          Default language: English. The language can be changed
           from within each ruleset.
         </p>
 
@@ -685,7 +1028,302 @@
           <button type="submit">Open ruleset →</button>
         </form>
       </section>
+
+      <!-- FAQ and Mod Team slider -->
+
+      <section id="community">
+        <p class="section-label">03 / Community</p>
+
+        <h2>Community information</h2>
+
+        <p class="section-description">
+          Learn more about the rules archive or meet the moderators
+          responsible for the Forza speedrunning boards.
+        </p>
+
+        <div class="info-slider">
+          <div
+            class="slider-tabs"
+            role="tablist"
+            aria-label="Community information"
+          >
+            <button
+              class="slider-tab active"
+              id="faq-tab"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="faq-panel"
+              data-slide="0"
+            >
+              FAQ
+            </button>
+
+            <button
+              class="slider-tab"
+              id="modteam-tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="modteam-panel"
+              data-slide="1"
+            >
+              Meet the Mod Team
+            </button>
+          </div>
+
+          <div class="info-viewport" id="info-viewport">
+            <div class="info-track" id="info-track">
+              <!-- FAQ slide -->
+
+              <article
+                class="info-slide"
+                id="faq-panel"
+                role="tabpanel"
+                aria-labelledby="faq-tab"
+              >
+                <div class="slide-heading">
+                  <p>Frequently asked questions</p>
+
+                  <h3>About the archive</h3>
+
+                  <span>
+                    Select a question to open or close its answer.
+                  </span>
+                </div>
+
+                <ul class="faq-list">
+                  <li>
+                    <details open>
+                      <summary>What is this website?</summary>
+
+                      <p class="faq-answer">
+                        This is a community-maintained archive for the
+                        Forza speedrunning boards and their rulesets.
+                        It provides direct links to the leaderboards and
+                        makes the rules easier to read in multiple
+                        languages.
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>Where do I submit a run?</summary>
+
+                      <p class="faq-answer">
+                        Select your game in the Boards section and open
+                        its speedrun.com leaderboard. Runs are submitted
+                        and verified through the appropriate game board,
+                        not directly through this website.
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>Which ruleset language opens first?</summary>
+
+                      <p class="faq-answer">
+                        Rulesets open in English by default. Use the
+                        language selector at the top of a ruleset page
+                        to switch to another available translation.
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>
+                        What happens if a translation differs from
+                        the English rules?
+                      </summary>
+
+                      <p class="faq-answer">
+                        The English ruleset should be treated as the
+                        primary version if a translated rule is unclear
+                        or outdated. Translation problems can be
+                        reported to the Forza Mod Team.
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>
+                        Why must run videos remain available?
+                      </summary>
+
+                      <p class="faq-answer">
+                        Moderators may need to review a run again after
+                        its original verification. A permanently
+                        accessible video ensures that the submitted run
+                        can still be checked.
+                      </p>
+                    </details>
+                  </li>
+				  
+                 <li>
+                    <details>
+                      <summary>
+                        How Should i Name my videos?
+                      </summary>
+
+                      <p class="faq-answer">
+                        Altough we will not set Strict Rules for Naming your
+                        Videos as many runners also use Timestamps/ Different Name for bigger videos
+                        On Full game runs this template : [Category] [Variables] [Time]
+                        or on ILs this one : [Category] [Class] [Time]
+						may make the verification or later re-verification progress
+						a lot easier both for the moderator and runner
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>How do I report an error?</summary>
+
+                      <p class="faq-answer">
+                        Contact a moderator through the Discord Server
+                        or SRC and clearly identify the game,
+                        category, rule, or translation that needs to be
+                        reviewed.
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>
+                        Is this an official speedrun.com or Forza site?
+                      </summary>
+
+                      <p class="faq-answer">
+                        No. This is an independent community project
+                        maintained by the moderators responsible for the
+                        Forza speedrunning boards.
+                      </p>
+                    </details>
+                  </li>
+                </ul>
+              </article>
+
+              <!-- Mod Team slide -->
+
+              <article
+                class="info-slide"
+                id="modteam-panel"
+                role="tabpanel"
+                aria-labelledby="modteam-tab"
+                aria-hidden="true"
+                inert
+              >
+                <div class="slide-heading">
+                  <p>Forza board moderators</p>
+
+                  <h3>Meet the Mod Team</h3>
+
+                  <span>
+                    The community members helping maintain and verify
+                    runs across the Forza speedrunning boards.
+                  </span>
+                </div>
+
+                <div class="mod-grid">
+                  <article class="mod-card">
+                    <strong>Sappytron</strong>
+                    <span>Also known as Sappy</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>AllanEndopay</strong>
+                    <span>Also known as Allan the Marathon Man</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>RealMartello / ShawnMartello</strong>
+                    <span>
+                      Also known as Shawn / Fkin Tired Frankie
+                    </span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Kayraman1 / KayKreideschrei</strong>
+                    <span>
+                      Also known as Kay / John Gauntlet van Diablo
+                    </span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Brandomusic</strong>
+                    <span>Also known as Brando the Titan</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Scoagogo</strong>
+                    <span>Also known as Scoa</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Zade</strong>
+                    <span>Also known as Quattro</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Veyron</strong>
+                    <span>
+                      Also known as Veyron the Limousine King
+                    </span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>tcrdragracing</strong>
+                    <span>Also known as TCR</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Rajzon</strong>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Master System Marcel</strong>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Shenaniganz</strong>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>omegaknife99</strong>
+                  </article>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <!-- Legal disclaimer -->
+
+    <section
+      class="legal-disclaimer"
+      aria-labelledby="legal-heading"
+    >
+      <h2 id="legal-heading">Legal disclaimer</h2>
+
+      <p>
+        This website and its maintainers are not speedrun.com management
+        staff. The Forza Mod Team is responsible only for the Forza
+        speedrunning boards linked on this website. This is an independent,
+        non-commercial community project and is not affiliated with,
+        endorsed by, or sponsored by speedrun.com, Forza, Playground Games,
+        Turn 10 Studios, or Microsoft. This website does not display paid
+        advertising or generate advertising revenue. All trademarks and
+        game-related properties belong to their respective owners.
+      </p>
+    </section>
 
     <footer>
       <p>Forza Speedrunning Community</p>
@@ -693,6 +1331,10 @@
     </footer>
 
     <script>
+      /*
+        Open the selected board or ruleset.
+      */
+
       function openSelectedLink(event, selectId) {
         event.preventDefault();
 
@@ -715,6 +1357,83 @@
         .addEventListener("submit", function (event) {
           openSelectedLink(event, "ruleset-game");
         });
+
+      /*
+        FAQ and Mod Team slider.
+      */
+
+      const sliderTabs =
+        document.querySelectorAll(".slider-tab");
+
+      const sliderPanels =
+        document.querySelectorAll(".info-slide");
+
+      const infoTrack =
+        document.getElementById("info-track");
+
+      const infoViewport =
+        document.getElementById("info-viewport");
+
+      let activeSlide = 0;
+
+      function updateSliderHeight() {
+        const activePanel = sliderPanels[activeSlide];
+
+        infoViewport.style.height =
+          activePanel.scrollHeight + "px";
+      }
+
+      function showSlide(slideNumber) {
+        activeSlide = slideNumber;
+
+        infoTrack.style.transform =
+          "translateX(-" + slideNumber * 100 + "%)";
+
+        sliderTabs.forEach(function (tab, index) {
+          const isActive = index === slideNumber;
+
+          tab.classList.toggle("active", isActive);
+          tab.setAttribute(
+            "aria-selected",
+            String(isActive)
+          );
+        });
+
+        sliderPanels.forEach(function (panel, index) {
+          const isActive = index === slideNumber;
+
+          panel.setAttribute(
+            "aria-hidden",
+            String(!isActive)
+          );
+
+          panel.inert = !isActive;
+        });
+
+        updateSliderHeight();
+      }
+
+      sliderTabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          showSlide(Number(tab.dataset.slide));
+        });
+      });
+
+      document
+        .querySelectorAll(".faq-list details")
+        .forEach(function (question) {
+          question.addEventListener(
+            "toggle",
+            updateSliderHeight
+          );
+        });
+
+      window.addEventListener(
+        "resize",
+        updateSliderHeight
+      );
+
+      showSlide(0);
     </script>
   </body>
 </html>
