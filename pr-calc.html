@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert Forza PR-stunt scores into leaderboard time.">
+    <title>Forza PR Stunt Calculator</title>
+
+    <style>
+      :root {
+        --text: #ffffff;
+        --muted-text: #c2c7cf;
+        --tree-lines: rgba(255, 255, 255, 0.22);
+        --accent: #e94b35;
+        --panel: rgba(8, 10, 13, 0.82);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-width: 320px;
+        background: #080a0d;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background: transparent;
+        color: var(--text);
+        font-family: Consolas, "Courier New", monospace;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      .page-background {
+        position: fixed;
+        z-index: -2;
+        inset: -20px;
+        background-color: transparent;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        transform: scale(1.03);
+      }
+
+      .page-overlay {
+        position: fixed;
+        z-index: -1;
+        inset: 0;
+        background: rgba(5, 7, 10, 0.38);
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        min-height: 70px;
+        padding: 16px 5%;
+        background: rgba(5, 7, 10, 0.82);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(8px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .brand-logo {
+        width: auto;
+        height: 34px;
+        object-fit: contain;
+      }
+
+      main {
+        width: min(1180px, 90%);
+        margin: 52px auto 70px;
+      }
+
+      .page-heading {
+        margin-bottom: 28px;
+      }
+
+      .page-heading h1 {
+        margin: 0;
+        font-size: clamp(38px, 6vw, 72px);
+        line-height: 0.98;
+        letter-spacing: -0.055em;
+      }
+
+      .page-heading span {
+        display: block;
+        max-width: 720px;
+        margin-top: 18px;
+        color: var(--muted-text);
+        line-height: 1.65;
+      }
+
+      .calculator-panel {
+        position: relative;
+        padding: clamp(20px, 4vw, 48px);
+        overflow: hidden;
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.17);
+        backdrop-filter: blur(9px);
+      }
+
+      .section-label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+        color: var(--muted-text);
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .event-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .event-option {
+        position: relative;
+        display: grid;
+        min-height: 112px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.025);
+        color: var(--text);
+        text-align: left;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 0;
+        cursor: pointer;
+        transition: border-color 150ms ease, background 150ms ease;
+      }
+
+      .event-option:hover {
+        border-color: rgba(233, 75, 53, 0.65);
+      }
+
+      .event-option:focus-visible {
+        border-color: var(--accent);
+        outline: 3px solid rgba(233, 75, 53, 0.2);
+      }
+
+      .event-option[aria-pressed="true"] {
+        background: rgba(233, 75, 53, 0.1);
+        border-color: var(--accent);
+      }
+
+      .event-option[aria-pressed="true"]::after {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        box-shadow: 0 0 10px rgba(233, 75, 53, 0.8);
+        content: "";
+      }
+
+      .event-code {
+        align-self: start;
+        color: var(--accent);
+        font-size: 25px;
+        font-weight: bold;
+        line-height: 1;
+        letter-spacing: -0.06em;
+      }
+
+      .event-copy {
+        align-self: end;
+      }
+
+      .event-copy strong,
+      .event-copy small {
+        display: block;
+      }
+
+      .event-copy strong {
+        margin-bottom: 6px;
+        font-size: 14px;
+      }
+
+      .event-copy small {
+        color: var(--muted-text);
+        font-size: 10px;
+        line-height: 1.4;
+      }
+
+      form {
+        margin-top: 32px;
+        padding-top: 28px;
+        border-top: 1px solid var(--tree-lines);
+      }
+
+      .input-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 190px auto;
+        align-items: end;
+        gap: 16px;
+      }
+
+      .field label,
+      .field small {
+        display: block;
+      }
+
+      .field label {
+        margin-bottom: 8px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .field small {
+        min-height: 15px;
+        margin-top: 7px;
+        color: #8f98a4;
+        font-size: 9px;
+      }
+
+      .score-input,
+      .unit-select,
+      .fixed-unit {
+        width: 100%;
+        height: 48px;
+        padding: 0 14px;
+        background: rgba(4, 6, 8, 0.72);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 2px;
+        outline: none;
+      }
+
+      .score-input {
+        font-size: 16px;
+      }
+
+      .score-input::placeholder {
+        color: #737c87;
+      }
+
+      .score-input:focus,
+      .unit-select:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(233, 75, 53, 0.16);
+      }
+
+      .unit-select option {
+        background: #0d1117;
+        color: #ffffff;
+      }
+
+      .fixed-unit {
+        display: flex;
+        align-items: center;
+        color: var(--muted-text);
+        font-size: 13px;
+      }
+
+      .calculate-button {
+        height: 48px;
+        margin-bottom: 22px;
+        padding: 0 24px;
+        background: var(--accent);
+        color: #ffffff;
+        border: 0;
+        border-radius: 2px;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .calculate-button:hover {
+        background: #ff5a42;
+      }
+
+      .calculate-button:focus-visible {
+        outline: 3px solid rgba(233, 75, 53, 0.28);
+        outline-offset: 2px;
+      }
+
+      .error-message {
+        min-height: 18px;
+        margin: 3px 0 0;
+        color: #ff9c8e;
+        font-size: 11px;
+      }
+
+      .time-console {
+        margin-top: 22px;
+        padding: clamp(18px, 3vw, 30px);
+        background: rgba(3, 5, 7, 0.76);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.28);
+      }
+
+      .time-console.has-result {
+        border-color: rgba(233, 75, 53, 0.65);
+      }
+
+      .result-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+        margin-bottom: 21px;
+      }
+
+      .result-label {
+        color: var(--accent);
+        font-size: 9px;
+        font-weight: bold;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .result-header h2 {
+        margin: 6px 0 0;
+        font-size: 17px;
+      }
+
+      .precision-badge {
+        padding: 6px 8px;
+        color: var(--muted-text);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .time-grid {
+        display: grid;
+        grid-template-columns: 1.25fr 1fr 1fr 1.25fr;
+        border-top: 1px solid var(--tree-lines);
+        border-bottom: 1px solid var(--tree-lines);
+      }
+
+      .time-segment {
+        min-width: 0;
+        padding: 21px clamp(10px, 2.2vw, 26px) 18px;
+        border-right: 1px solid var(--tree-lines);
+      }
+
+      .time-segment:last-child {
+        border-right: 0;
+      }
+
+      .time-segment strong,
+      .time-segment span {
+        display: block;
+      }
+
+      .time-segment strong {
+        font-size: clamp(28px, 5vw, 58px);
+        font-variant-numeric: tabular-nums;
+        line-height: 1;
+        letter-spacing: -0.08em;
+      }
+
+      .time-segment span {
+        margin-top: 9px;
+        color: #8f98a4;
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .milliseconds strong {
+        color: var(--accent);
+      }
+
+      .conversion-line {
+        min-height: 19px;
+        margin: 17px 0 0;
+        color: var(--muted-text);
+        font-size: 11px;
+        line-height: 1.6;
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 25px 5%;
+        background: rgba(5, 7, 10, 0.85);
+        color: var(--muted-text);
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        font-size: 10px;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      @media (max-width: 840px) {
+        .event-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .input-row {
+          grid-template-columns: minmax(0, 1fr) 170px;
+        }
+
+        .calculate-button {
+          grid-column: 1 / -1;
+          width: 100%;
+          margin-bottom: 0;
+        }
+
+        .time-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .time-segment:nth-child(2) {
+          border-right: 0;
+        }
+
+        .time-segment:nth-child(-n + 2) {
+          border-bottom: 1px solid var(--tree-lines);
+        }
+      }
+
+      @media (max-width: 560px) {
+        header,
+        footer {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        main {
+          width: 94%;
+          margin-top: 34px;
+        }
+
+        .page-heading h1 {
+          font-size: clamp(36px, 13vw, 54px);
+        }
+
+        .event-grid,
+        .input-row {
+          grid-template-columns: 1fr;
+        }
+
+        .event-option {
+          min-height: 98px;
+        }
+
+        .result-header {
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .event-option {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-background" id="page-background" aria-hidden="true"></div>
+    <div class="page-overlay" aria-hidden="true"></div>
+
+    <header>
+      <div class="brand">
+        <img class="brand-logo" id="brand-logo" alt="FSC logo" hidden>
+        <span>Forza Speedrunning Community</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-heading" aria-labelledby="page-title">
+        <h1 id="page-title">PR Stunt Calculator</h1>
+        <span>Convert an in-game score into the exact time used for leaderboard entry.</span>
+      </section>
+
+      <section class="calculator-panel">
+        <div class="section-label">Select stunt type</div>
+
+        <div class="event-grid" role="group" aria-label="PR stunt type">
+          <button class="event-option" type="button" data-mode="drift_zone" aria-pressed="true">
+            <span class="event-code">DZ</span>
+            <span class="event-copy"><strong>Drift Zone</strong><small>1 point equals 1 millisecond</small></span>
+          </button>
+
+          <button class="event-option" type="button" data-mode="speed_trap" aria-pressed="false">
+            <span class="event-code">ST</span>
+            <span class="event-copy"><strong>Speed Trap</strong><small>Converted to km/h before timing</small></span>
+          </button>
+
+          <button class="event-option" type="button" data-mode="speed_zone" aria-pressed="false">
+            <span class="event-code">SZ</span>
+            <span class="event-copy"><strong>Speed Zone</strong><small>Converted to km/h before timing</small></span>
+          </button>
+
+          <button class="event-option" type="button" data-mode="danger_sign" aria-pressed="false">
+            <span class="event-code">DS</span>
+            <span class="event-copy"><strong>Danger Sign</strong><small>Converted to metres before timing</small></span>
+          </button>
+        </div>
+
+        <form id="calculator" novalidate>
+          <div class="section-label">Enter result</div>
+
+          <div class="input-row">
+            <div class="field">
+              <label for="amount">Displayed amount</label>
+              <input
+                class="score-input"
+                id="amount"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                placeholder="Example: 250000"
+                aria-describedby="amount-help calculation-error"
+              >
+              <small id="amount-help">Dot and decimal comma are both accepted.</small>
+            </div>
+
+            <div class="field">
+              <label for="unit">Unit</label>
+              <select class="unit-select" id="unit" aria-label="Unit" hidden></select>
+              <div class="fixed-unit" id="fixed-unit">Points</div>
+              <small id="base-unit">Base: points</small>
+            </div>
+
+            <button class="calculate-button" type="submit">Calculate time</button>
+          </div>
+
+          <p class="error-message" id="calculation-error" role="alert">&nbsp;</p>
+        </form>
+
+        <section class="time-console" id="time-console" aria-labelledby="result-heading" aria-live="polite">
+          <div class="result-header">
+            <div>
+              <span class="result-label">Calculated leaderboard time</span>
+              <h2 id="result-heading">Drift Zone</h2>
+            </div>
+            <span class="precision-badge">Nearest 1 ms</span>
+          </div>
+
+          <div class="time-grid">
+            <div class="time-segment"><strong id="hours">000</strong><span>Hours</span></div>
+            <div class="time-segment"><strong id="minutes">00</strong><span>Minutes</span></div>
+            <div class="time-segment"><strong id="seconds">00</strong><span>Seconds</span></div>
+            <div class="time-segment milliseconds"><strong id="milliseconds">000</strong><span>Milliseconds</span></div>
+          </div>
+
+          <p class="conversion-line" id="conversion-line">Enter a score above to calculate its leaderboard time.</p>
+        </section>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>Forza Speedrunning Community</p>
+      <p>Community-made timing utility</p>
+    </footer>
+
+    <script>
+      // CUSTOMIZATION
+      // if yall ever need to change these out and im not around its here
+      // if theyre empty theyre gonna use a fallback
+      const customization = {
+        backgroundImage: "https://i.imgur.com/1QvwrHV.jpg", // add img here either link or filepath
+        logoImage: ""        // and here too
+      };
+
+      const modes = {
+        drift_zone: {
+          label: "Drift Zone",
+          placeholder: "Example: 250000",
+          base: "points",
+          units: [{ value: "points", label: "Points" }]
+        },
+        speed_trap: {
+          label: "Speed Trap",
+          placeholder: "Example: 123,45",
+          base: "km/h",
+          units: [
+            { value: "kph", label: "KPH" },
+            { value: "mph", label: "MPH" }
+          ]
+        },
+        speed_zone: {
+          label: "Speed Zone",
+          placeholder: "Example: 123,45",
+          base: "km/h",
+          units: [
+            { value: "kph", label: "KPH" },
+            { value: "mph", label: "MPH" }
+          ]
+        },
+        danger_sign: {
+          label: "Danger Sign",
+          placeholder: "Example: 123,45",
+          base: "metres",
+          units: [
+            { value: "m", label: "Metres (m)" },
+            { value: "ft", label: "Feet (ft)" }
+          ]
+        }
+      };
+
+      const maximumAmount = 1000000000;
+      const numberFormatter = new Intl.NumberFormat("en-US", {
+        maximumFractionDigits: 6
+      });
+
+      const modeButtons = document.querySelectorAll("[data-mode]");
+      const pageBackground = document.getElementById("page-background");
+      const brandLogo = document.getElementById("brand-logo");
+      const form = document.getElementById("calculator");
+      const amountInput = document.getElementById("amount");
+      const unitSelect = document.getElementById("unit");
+      const fixedUnit = document.getElementById("fixed-unit");
+      const baseUnit = document.getElementById("base-unit");
+      const errorMessage = document.getElementById("calculation-error");
+      const resultHeading = document.getElementById("result-heading");
+      const timeConsole = document.getElementById("time-console");
+      const conversionLine = document.getElementById("conversion-line");
+
+      let activeMode = "drift_zone";
+
+      function applyCustomization() {
+        pageBackground.style.backgroundImage = customization.backgroundImage
+          ? `url("${customization.backgroundImage}")`
+          : "none";
+
+        if (customization.logoImage) {
+          brandLogo.src = customization.logoImage;
+          brandLogo.hidden = false;
+        } else {
+          brandLogo.hidden = true;
+        }
+      }
+
+      brandLogo.addEventListener("error", () => {
+        brandLogo.hidden = true;
+      });
+
+      function resetResult() {
+        document.getElementById("hours").textContent = "000";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
+        document.getElementById("milliseconds").textContent = "000";
+        conversionLine.textContent = "Enter a score above to calculate its leaderboard time.";
+        timeConsole.classList.remove("has-result");
+      }
+
+      function setMode(mode) {
+        activeMode = mode;
+        const config = modes[mode];
+
+        modeButtons.forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
+        });
+
+        resultHeading.textContent = config.label;
+        amountInput.placeholder = config.placeholder;
+        baseUnit.textContent = `Base: ${config.base}`;
+        errorMessage.innerHTML = "&nbsp;";
+
+        unitSelect.replaceChildren();
+
+        config.units.forEach((unit) => {
+          const option = document.createElement("option");
+          option.value = unit.value;
+          option.textContent = unit.label;
+          unitSelect.appendChild(option);
+        });
+
+        const hasMultipleUnits = config.units.length > 1;
+        unitSelect.hidden = !hasMultipleUnits;
+        fixedUnit.hidden = hasMultipleUnits;
+        fixedUnit.textContent = config.units[0].label;
+        resetResult();
+      }
+
+      function parseAmount(rawAmount) {
+        const normalized = rawAmount.trim().replace(/\s/g, "").replace(",", ".");
+
+        if (!/^\d+(?:\.\d+)?$/.test(normalized)) {
+          throw new Error("Enter a positive number, for example 123.45 or 123,45.");
+        }
+
+        const amount = Number(normalized);
+
+        if (!Number.isFinite(amount) || amount <= 0) {
+          throw new Error("The amount must be greater than zero.");
+        }
+
+        if (amount > maximumAmount) {
+          throw new Error("The amount is too large. The maximum is 1,000,000,000.");
+        }
+
+        return amount;
+      }
+
+      function calculate(mode, amount, unit) {
+        if (mode === "drift_zone") {
+          if (!Number.isInteger(amount)) {
+            throw new Error("Drift Zone points must be a whole number.");
+          }
+
+          return {
+            totalMilliseconds: amount,
+            conversion: `${numberFormatter.format(amount)} points × 1 ms`
+          };
+        }
+
+        if (mode === "speed_trap" || mode === "speed_zone") {
+          const speedKph = unit === "mph" ? amount * 1.609344 : amount;
+
+          return {
+            totalMilliseconds: Math.round(speedKph * 100),
+            conversion: `${numberFormatter.format(amount)} ${unit.toUpperCase()} = ${numberFormatter.format(speedKph)} km/h`
+          };
+        }
+
+        const distanceMetres = unit === "ft" ? amount * 0.3048 : amount;
+
+        return {
+          totalMilliseconds: Math.round(distanceMetres * 100),
+          conversion: `${numberFormatter.format(amount)} ${unit} = ${numberFormatter.format(distanceMetres)} m`
+        };
+      }
+
+      function showDuration(totalMilliseconds) {
+        const hours = Math.floor(totalMilliseconds / 3600000);
+        const afterHours = totalMilliseconds % 3600000;
+        const minutes = Math.floor(afterHours / 60000);
+        const afterMinutes = afterHours % 60000;
+        const seconds = Math.floor(afterMinutes / 1000);
+        const milliseconds = afterMinutes % 1000;
+
+        document.getElementById("hours").textContent = String(hours).padStart(3, "0");
+        document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+        document.getElementById("milliseconds").textContent = String(milliseconds).padStart(3, "0");
+      }
+
+      modeButtons.forEach((button) => {
+        button.addEventListener("click", () => setMode(button.dataset.mode));
+      });
+
+      amountInput.addEventListener("input", () => {
+        errorMessage.innerHTML = "&nbsp;";
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        try {
+          const amount = parseAmount(amountInput.value);
+          const unit = modes[activeMode].units.length === 1
+            ? modes[activeMode].units[0].value
+            : unitSelect.value;
+          const result = calculate(activeMode, amount, unit);
+
+          showDuration(result.totalMilliseconds);
+          conversionLine.textContent = result.conversion;
+          timeConsole.classList.add("has-result");
+          errorMessage.innerHTML = "&nbsp;";
+        } catch (error) {
+          resetResult();
+          errorMessage.textContent = error instanceof Error
+            ? error.message
+            : "Unable to calculate this score.";
+        }
+      });
+
+      applyCustomization();
+      setMode(activeMode);
+    </script>
+  </body>
+</html>
