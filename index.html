@@ -277,8 +277,12 @@
         background: var(--background-light);
       }
 
-      #community {
+      #calculator {
         background: rgba(9, 11, 14, 0.92);
+      }
+
+      #community {
+        background: var(--background-light);
       }
 
       main h2 {
@@ -398,6 +402,39 @@
       }
 
       .selector button:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+      }
+
+      /*
+        Calculator link
+      */
+
+      .calculator-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 32px;
+        padding: 15px 24px;
+
+        background: var(--accent);
+        color: #ffffff;
+
+        border: 1px solid var(--accent);
+        border-radius: 3px;
+
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-decoration: none;
+
+        transition:
+          background 150ms ease,
+          transform 150ms ease;
+      }
+
+      .calculator-link:hover {
         background: var(--accent-hover);
         transform: translateY(-2px);
       }
@@ -740,6 +777,10 @@
           width: 100%;
         }
 
+        .calculator-link {
+          width: 100%;
+        }
+
         .slider-tabs {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -779,6 +820,7 @@
         nav a::after,
         .selector,
         .selector button,
+        .calculator-link,
         .slider-tab,
         .info-viewport,
         .info-track,
@@ -799,7 +841,7 @@
         <img
           class="brand-logo"
           src="images/fsc-logo.png"
-          alt="FSC logo placeholder"
+          alt="FSC logo"
         >
 
         <h1>Forza Speedrunning Community</h1>
@@ -808,6 +850,7 @@
       <nav aria-label="Main navigation">
         <a href="#boards">Boards</a>
         <a href="#rulesets">Rulesets</a>
+        <a href="#calculator">Calculator</a>
         <a href="#community">FAQ &amp; Team</a>
       </nav>
     </header>
@@ -838,7 +881,7 @@
       <!-- Board selection -->
 
       <section id="boards">
-        <p class="section-label">01 / Boards</p>
+
 
         <h2>Speedrunning boards</h2>
 
@@ -926,7 +969,7 @@
       <!-- Ruleset selection -->
 
       <section id="rulesets">
-        <p class="section-label">02 / Rulesets</p>
+
 
         <h2>Community rulesets</h2>
 
@@ -1029,10 +1072,27 @@
         </form>
       </section>
 
+      <!-- PR Stunt Calculator -->
+
+      <section id="calculator">
+
+
+        <h2>PR Stunt Calculator</h2>
+
+        <p class="section-description">
+          Convert Drift Zone, Speed Trap, Speed Zone, and Danger Sign
+          results into their corresponding leaderboard time.
+        </p>
+
+        <a class="calculator-link" href="pr-calc.html">
+          Open calculator →
+        </a>
+      </section>
+
       <!-- FAQ and Mod Team slider -->
 
       <section id="community">
-        <p class="section-label">03 / Community</p>
+
 
         <h2>Community information</h2>
 
@@ -1162,20 +1222,20 @@
                       </p>
                     </details>
                   </li>
-				  
-                 <li>
+
+                  <li>
                     <details>
                       <summary>
-                        How Should i Name my videos?
+                        How should I name my videos?
                       </summary>
 
                       <p class="faq-answer">
-                        Altough we will not set Strict Rules for Naming your
-                        Videos as many runners also use Timestamps/ Different Name for bigger videos
-                        On Full game runs this template : [Category] [Variables] [Time]
-                        or on ILs this one : [Category] [Class] [Time]
-						may make the verification or later re-verification progress
-						a lot easier both for the moderator and runner
+                        Although we do not set strict rules for naming
+                        videos, clear names can make verification and
+                        later re-verification easier for both the
+                        moderator and runner. For full-game runs, use
+                        [Category] [Variables] [Time]. For individual
+                        levels, use [Category] [Class] [Time].
                       </p>
                     </details>
                   </li>
@@ -1185,10 +1245,9 @@
                       <summary>How do I report an error?</summary>
 
                       <p class="faq-answer">
-                        Contact a moderator through the Discord Server
-                        or SRC and clearly identify the game,
-                        category, rule, or translation that needs to be
-                        reviewed.
+                        Contact a moderator through the Discord server
+                        or SRC and clearly identify the game, category,
+                        rule, or translation that needs to be reviewed.
                       </p>
                     </details>
                   </li>
