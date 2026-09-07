@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Forza Horizon 6 [2026] Rules</title>
+    <title>Forza Speedrunning Community</title>
 
     <style>
       :root {
-        --background-image: url("../../images/forza-horizon-6-2026.jpg");
+        --background-image: url("https://i.imgur.com/H5rLhqW.png");
 
-        --text: #ffffff;
-        --muted-text: #c2c7cf;
-        --tree-lines: rgba(255, 255, 255, 0.3);
-        --accent: #e94b35;
+        --background: #090b0e;
+        --background-light: rgba(13, 16, 21, 0.94);
         --panel: rgba(8, 10, 13, 0.78);
+        --panel-solid: #15191f;
+        --panel-hover: #191e25;
+
+        --text: #f5f5f5;
+        --muted-text: #aeb4bd;
+
+        --border: rgba(255, 255, 255, 0.17);
+        --tree-lines: rgba(255, 255, 255, 0.3);
+
+        --accent: #e94b35;
+        --accent-hover: #ff6048;
       }
 
       * {
@@ -22,7 +31,7 @@
       }
 
       html {
-        background: #080a0d;
+        background: var(--background);
         scroll-behavior: smooth;
       }
 
@@ -30,12 +39,18 @@
         min-height: 100vh;
         margin: 0;
 
+        background: transparent;
         color: var(--text);
+
         font-family:
           Consolas,
           "Courier New",
           monospace;
       }
+
+      /*
+        Blurred page background
+      */
 
       .page-background {
         position: fixed;
@@ -46,7 +61,7 @@
         background-position: center;
         background-size: cover;
 
-        filter: blur(2px);
+        filter: blur(3px);
         transform: scale(1.03);
       }
 
@@ -58,24 +73,50 @@
         background:
           linear-gradient(
             to bottom,
-            rgba(5, 7, 10, 0.7),
-            rgba(5, 7, 10, 0.9)
+            rgba(5, 7, 10, 0.82),
+            rgba(5, 7, 10, 0.96)
           );
       }
 
+      /*
+        Header
+      */
+
       header {
+        position: sticky;
+        z-index: 10;
+        top: 0;
+
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 30px;
 
-        min-height: 70px;
-        padding: 16px 5%;
+        min-height: 72px;
+        padding: 12px 5%;
 
-        background: rgba(5, 7, 10, 0.82);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(5, 7, 10, 0.86);
+        border-bottom: 1px solid var(--border);
 
-        backdrop-filter: blur(8px);
+        backdrop-filter: blur(12px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand-logo {
+        display: block;
+
+        width: 44px;
+        height: 44px;
+
+        object-fit: contain;
+
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border);
       }
 
       header h1 {
@@ -83,122 +124,461 @@
         font-size: 18px;
       }
 
-      header a {
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+
+      nav a {
+        position: relative;
+        padding: 26px 0;
+
         color: var(--text);
+
+        font-size: 13px;
+        font-weight: bold;
         text-decoration: none;
       }
 
-      header a:hover {
-        color: var(--accent);
+      nav a::after {
+        position: absolute;
+        right: 0;
+        bottom: -1px;
+        left: 0;
+
+        height: 2px;
+
+        background: var(--accent);
+
+        content: "";
+        transform: scaleX(0);
+        transition: transform 150ms ease;
       }
 
-      .language-selector {
+      nav a:hover {
+        color: var(--accent-hover);
+      }
+
+      nav a:hover::after {
+        transform: scaleX(1);
+      }
+
+      /*
+        Hero
+      */
+
+      .hero {
+        display: grid;
+        grid-template-rows: 1fr 2fr;
+
+        min-height: calc(100vh - 72px);
+        overflow: hidden;
+      }
+
+      .hero-image {
+        position: relative;
+        min-height: 220px;
+
+        background-image:
+          linear-gradient(
+            to bottom,
+            rgba(9, 11, 14, 0.1),
+            rgba(9, 11, 14, 0.72)
+          ),
+          var(--background-image);
+
+        background-position: center;
+        background-size: cover;
+
+        filter: blur(1px);
+        transform: scale(1.02);
+      }
+
+      .hero-content {
+        position: relative;
+
         display: flex;
-        align-items: center;
-        gap: 10px;
+        flex-direction: column;
+        justify-content: center;
+
+        min-height: 400px;
+        padding: 60px 8%;
+
+        background:
+          linear-gradient(
+            120deg,
+            rgba(8, 10, 13, 0.98) 0%,
+            rgba(13, 16, 21, 0.96) 65%,
+            rgba(18, 21, 26, 0.94) 100%
+          );
+
+        border-top: 1px solid var(--border);
       }
 
-      .language-selector label {
-        width: auto;
+      .hero-content::before {
+        width: 60px;
+        height: 4px;
+        margin-bottom: 24px;
+
+        background: var(--accent);
+
+        content: "";
+      }
+
+      .eyebrow,
+      .section-label {
+        margin: 0 0 14px;
+
+        color: var(--accent);
+
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .hero-content h2 {
+        max-width: 850px;
+        margin: 0 0 18px;
+
+        font-size: clamp(42px, 7vw, 90px);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      .hero-description {
+        max-width: 700px;
+        margin: 0;
+
+        color: var(--muted-text);
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      /*
+        Main sections
+      */
+
+      main > section:not(.hero) {
+        padding: 90px 8%;
+
+        border-top: 1px solid var(--border);
+        scroll-margin-top: 72px;
+
+        backdrop-filter: blur(7px);
+      }
+
+      #boards {
+        background: rgba(9, 11, 14, 0.9);
+      }
+
+      #rulesets {
+        background: var(--background-light);
+      }
+
+      #calculator {
+        background: rgba(9, 11, 14, 0.92);
+      }
+
+      #community {
+        background: var(--background-light);
+      }
+
+      main h2 {
+        margin: 0 0 14px;
+
+        font-size: clamp(38px, 5vw, 58px);
+        letter-spacing: -0.03em;
+      }
+
+      .section-description {
+        max-width: 720px;
+        margin: 0;
+
+        color: var(--muted-text);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .language-note {
+        display: inline-block;
+        margin: 16px 0 0;
+        padding: 8px 11px;
+
+        background: rgba(233, 75, 53, 0.1);
+        color: #ffb5a7;
+
+        border: 1px solid rgba(233, 75, 53, 0.3);
+
+        font-size: 12px;
+      }
+
+      /*
+        Board and ruleset selectors
+      */
+
+      .selector {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+
+        max-width: 780px;
+        margin-top: 32px;
+        padding: 24px;
+
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--accent);
+
+        backdrop-filter: blur(7px);
+
+        transition:
+          background 150ms ease,
+          border-color 150ms ease;
+      }
+
+      .selector:hover {
+        background: rgba(25, 30, 37, 0.9);
+        border-color: rgba(255, 255, 255, 0.28);
+        border-left-color: var(--accent);
+      }
+
+      .selector label {
+        grid-column: 1 / -1;
+
         font-size: 13px;
-        font-weight: bold;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
-      .language-selector select {
-        width: auto;
-        min-width: 130px;
-        padding: 8px 12px;
+      select {
+        width: 100%;
+        min-width: 0;
+        padding: 14px 16px;
 
-        background: rgba(10, 12, 16, 0.85);
+        background: #0e1116;
         color: #ffffff;
 
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 4px;
+        border: 1px solid #3b424d;
+        border-radius: 3px;
+
+        font-family: inherit;
+        font-size: 15px;
+
+        cursor: pointer;
       }
 
-      .language-selector select:focus {
+      select:hover {
+        border-color: #596270;
+      }
+
+      select:focus {
         border-color: var(--accent);
         outline: 2px solid rgba(233, 75, 53, 0.25);
       }
 
-      .language-selector option:disabled {
-        color: #777b82;
+      .selector button {
+        min-width: 150px;
+        padding: 14px 24px;
+
+        background: var(--accent);
+        color: #ffffff;
+
+        border: 0;
+        border-radius: 3px;
+
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+
+        cursor: pointer;
+
+        transition:
+          background 150ms ease,
+          transform 150ms ease;
       }
 
-      main {
-        width: min(1200px, 90%);
-        margin: 60px auto;
+      .selector button:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
       }
 
-      .rules-heading {
+      /*
+        Calculator link
+      */
+
+      .calculator-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 32px;
+        padding: 15px 24px;
+
+        background: var(--accent);
+        color: #ffffff;
+
+        border: 1px solid var(--accent);
+        border-radius: 3px;
+
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-decoration: none;
+
+        transition:
+          background 150ms ease,
+          transform 150ms ease;
+      }
+
+      .calculator-link:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+      }
+
+      /*
+        FAQ and Mod Team slider
+      */
+
+      .info-slider {
+        max-width: 1200px;
+        margin-top: 38px;
+      }
+
+      .slider-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .slider-tab {
+        position: relative;
+
+        padding: 13px 20px;
+
+        background: rgba(14, 17, 22, 0.9);
+        color: var(--muted-text);
+
+        border: 1px solid var(--border);
+
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+
+        cursor: pointer;
+
+        transition:
+          color 150ms ease,
+          background 150ms ease,
+          border-color 150ms ease;
+      }
+
+      .slider-tab:hover {
+        color: var(--text);
+        border-color: rgba(255, 255, 255, 0.32);
+      }
+
+      .slider-tab.active {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+      }
+
+      .info-viewport {
+        overflow: hidden;
+
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--accent);
+
+        backdrop-filter: blur(8px);
+
+        transition: height 300ms ease;
+      }
+
+      .info-track {
+        display: flex;
+        align-items: flex-start;
+
+        transition: transform 350ms ease;
+      }
+
+      .info-slide {
+        flex: 0 0 100%;
+        width: 100%;
+        padding: clamp(24px, 5vw, 54px);
+      }
+
+      .slide-heading {
         margin-bottom: 30px;
       }
 
-      .rules-heading p {
+      .slide-heading p {
         margin: 0 0 10px;
 
         color: var(--accent);
-        font-size: 13px;
+
+        font-size: 12px;
         font-weight: bold;
         letter-spacing: 0.12em;
         text-transform: uppercase;
       }
 
-      .rules-heading h2 {
-        margin: 0;
+      .slide-heading h3 {
+        margin: 0 0 12px;
 
-        font-size: clamp(35px, 6vw, 70px);
-        line-height: 1;
+        font-size: clamp(30px, 4vw, 46px);
       }
 
-      .rules-heading span {
+      .slide-heading span {
         display: block;
-        margin-top: 16px;
+
+        max-width: 700px;
 
         color: var(--muted-text);
         line-height: 1.6;
       }
 
-      .rules-panel {
-        padding: clamp(20px, 4vw, 50px);
+      /*
+        FAQ tree
+      */
 
-        background: var(--panel);
-        border: 1px solid rgba(255, 255, 255, 0.17);
-
-        backdrop-filter: blur(7px);
-      }
-
-      .rule-tree,
-      .rule-tree ul {
+      .faq-list {
         margin: 0;
-        padding-left: 0;
+        padding: 0;
+
         list-style: none;
       }
 
-      .rule-tree ul {
-        margin: 5px 0 5px 8px;
+      .faq-list li {
+        position: relative;
         padding-left: 28px;
 
         border-left: 1px solid var(--tree-lines);
       }
 
-      .rule-tree li {
-        position: relative;
-        padding: 5px 0;
-      }
-
-      .rule-tree ul > li::before {
+      .faq-list li::before {
         position: absolute;
-        top: 17px;
-        left: -28px;
+        top: 25px;
+        left: 0;
 
         width: 18px;
+
         border-top: 1px solid var(--tree-lines);
 
         content: "";
       }
 
-      summary {
+      .faq-list details {
+        padding: 14px 0;
+      }
+
+      .faq-list summary {
         display: flex;
         align-items: center;
         gap: 9px;
@@ -212,68 +592,223 @@
         user-select: none;
       }
 
-      summary::-webkit-details-marker {
+      .faq-list summary::-webkit-details-marker {
         display: none;
       }
 
-      summary::before {
+      .faq-list summary::before {
         color: var(--accent);
+
         content: "▶";
 
         font-size: 10px;
         transition: transform 150ms ease;
       }
 
-      details[open] > summary::before {
+      .faq-list details[open] > summary::before {
         transform: rotate(90deg);
       }
 
-      summary:hover {
-        color: var(--accent);
+      .faq-list summary:hover {
+        color: var(--accent-hover);
       }
 
-      .rule {
+      .faq-answer {
+        max-width: 850px;
+        margin: 14px 0 0 19px;
+
+        color: var(--muted-text);
+        line-height: 1.7;
+      }
+
+      /*
+        Mod Team cards
+      */
+
+      .mod-grid {
+        display: grid;
+        grid-template-columns:
+          repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+      }
+
+      .mod-card {
+        min-height: 105px;
+        padding: 19px;
+
+        background: rgba(14, 17, 22, 0.78);
+
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+
+        transition:
+          background 150ms ease,
+          transform 150ms ease,
+          border-color 150ms ease;
+      }
+
+      .mod-card:hover {
+        background: var(--panel-hover);
+        border-color: rgba(255, 255, 255, 0.28);
+        border-left-color: var(--accent);
+
+        transform: translateY(-2px);
+      }
+
+      .mod-card strong {
+        display: block;
+        margin-bottom: 8px;
+
+        color: var(--text);
+        font-size: 15px;
+        line-height: 1.35;
+      }
+
+      .mod-card span {
         display: block;
 
-        color: #f3f3f3;
-        line-height: 1.55;
+        color: var(--muted-text);
+        font-size: 13px;
+        line-height: 1.5;
       }
 
-      .important {
-        color: #ffb5a7;
+      /*
+        Legal disclaimer
+      */
+
+      .legal-disclaimer {
+        padding: 32px 8%;
+
+        background: rgba(5, 7, 10, 0.96);
+        color: #7f8792;
+
+        border-top: 1px solid var(--border);
       }
+
+      .legal-disclaimer h2 {
+        margin: 0 0 9px;
+
+        color: #aeb4bd;
+
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .legal-disclaimer p {
+        max-width: 1100px;
+        margin: 0;
+
+        font-size: 11px;
+        line-height: 1.7;
+      }
+
+      /*
+        Footer
+      */
 
       footer {
-        padding: 30px 5%;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
 
-        background: rgba(5, 7, 10, 0.85);
-        color: var(--muted-text);
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 24px 8%;
+
+        background: #040506;
+        color: #656c75;
+
+        border-top: 1px solid var(--border);
+
+        font-size: 11px;
       }
 
       footer p {
         margin: 0;
       }
 
-      @media (max-width: 750px) {
+      /*
+        Mobile layout
+      */
+
+      @media (max-width: 760px) {
         header {
-          align-items: flex-start;
+          position: relative;
+
           flex-direction: column;
+          align-items: flex-start;
+          gap: 14px;
+
+          padding-top: 18px;
+          padding-bottom: 18px;
         }
 
-        main {
-          width: 94%;
-          margin: 35px auto;
+        nav {
+          width: 100%;
+          gap: 18px;
         }
 
-        .rule-tree ul {
-          margin-left: 3px;
+        nav a {
+          padding: 8px 0;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+
+        .hero-content {
+          min-height: 450px;
+          padding: 50px 6%;
+        }
+
+        main > section:not(.hero) {
+          padding: 65px 6%;
+        }
+
+        .selector {
+          grid-template-columns: 1fr;
+          padding: 18px;
+        }
+
+        .selector label {
+          grid-column: auto;
+        }
+
+        .selector button {
+          width: 100%;
+        }
+
+        .calculator-link {
+          width: 100%;
+        }
+
+        .slider-tabs {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .slider-tab {
+          width: 100%;
+          padding: 12px 8px;
+        }
+
+        .info-slide {
+          padding: 25px 18px;
+        }
+
+        .faq-list li {
           padding-left: 18px;
         }
 
-        .rule-tree ul > li::before {
-          left: -18px;
+        .faq-list li::before {
           width: 11px;
+        }
+
+        .mod-grid {
+          grid-template-columns: 1fr;
+        }
+
+        footer {
+          flex-direction: column;
         }
       }
 
@@ -282,7 +817,15 @@
           scroll-behavior: auto;
         }
 
-        summary::before {
+        nav a::after,
+        .selector,
+        .selector button,
+        .calculator-link,
+        .slider-tab,
+        .info-viewport,
+        .info-track,
+        .faq-list summary::before,
+        .mod-card {
           transition: none;
         }
       }
@@ -294,581 +837,662 @@
     <div class="page-overlay" aria-hidden="true"></div>
 
     <header>
-      <h1>Forza Speedrunning Community</h1>
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="images/fsc-logo.png"
+          alt="FSC logo"
+        >
 
-      <a href="../../index.html">← Back to archive</a>
-
-      <div class="language-selector">
-        <label for="language">Language</label>
-
-        <select id="language">
-          <option value="en" selected>English</option>
-          <option value="de">Deutsch</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-          <option value="ja">日本語</option>
-          <option value="ru">Русский</option>
-        </select>
+        <h1>Forza Speedrunning Community</h1>
       </div>
+
+      <nav aria-label="Main navigation">
+        <a href="#boards">Boards</a>
+        <a href="#rulesets">Rulesets</a>
+        <a href="#calculator">Calculator</a>
+        <a href="#community">FAQ &amp; Team</a>
+      </nav>
     </header>
 
     <main>
-      <section class="rules-heading">
-        <p>Official community ruleset</p>
+      <!-- Hero -->
 
-        <h2>Forza Horizon 6 [2026]</h2>
+      <section class="hero" id="top">
+        <div
+          class="hero-image"
+          role="img"
+          aria-label="Forza racing cars on a track"
+        ></div>
 
-        <span>
-          Select a heading to open or close that part of the rule tree.
-        </span>
+        <div class="hero-content">
+          <p class="eyebrow">Community rules archive</p>
+
+          <h2>Find the rules for your run</h2>
+
+          <p class="hero-description">
+            Choose a Forza game board or open its community-maintained
+            ruleset. The archive covers both the Forza Motorsport and
+            Forza Horizon series.
+          </p>
+        </div>
       </section>
 
-      <section class="rules-panel">
-        <ul class="rule-tree">
-          <!-- General Rules -->
+      <!-- Board selection -->
 
-          <li>
-            <details open>
-              <summary>General Rules</summary>
+      <section id="boards">
 
-              <ul>
-                <li>
-                  <span class="rule">
-                    All runs require a complete video for verification.
+
+        <h2>Speedrunning boards</h2>
+
+        <p class="section-description">
+          Select a game to open its speedrun.com leaderboard.
+        </p>
+
+        <form class="selector" id="board-selector">
+          <label for="board-game">Select a game board</label>
+
+          <select id="board-game" required>
+            <option value="" selected disabled>
+              Choose a game
+            </option>
+
+            <optgroup label="Forza Motorsport Series">
+              <option value="https://www.speedrun.com/fm1">
+                Forza Motorsport [2005]
+              </option>
+
+              <option value="https://www.speedrun.com/fm2">
+                Forza Motorsport 2 [2007]
+              </option>
+
+              <option value="https://www.speedrun.com/forza_motorsport_3">
+                Forza Motorsport 3 [2009]
+              </option>
+
+              <option value="https://www.speedrun.com/fm4">
+                Forza Motorsport 4 [2011]
+              </option>
+
+              <option value="https://www.speedrun.com/fm5">
+                Forza Motorsport 5 [2013]
+              </option>
+
+              <option value="https://www.speedrun.com/fm6">
+                Forza Motorsport 6 [2015]
+              </option>
+
+              <option value="https://www.speedrun.com/fm7">
+                Forza Motorsport 7 [2017]
+              </option>
+
+              <option value="https://www.speedrun.com/fm_2023">
+                Forza Motorsport [2023]
+              </option>
+            </optgroup>
+
+            <optgroup label="Forza Horizon Series">
+              <option value="https://www.speedrun.com/fh1">
+                Forza Horizon [2012]
+              </option>
+
+              <option value="https://www.speedrun.com/fh2_xbox360">
+                Forza Horizon 2 X360 [2014]
+              </option>
+
+              <option value="https://www.speedrun.com/fh2">
+                Forza Horizon 2 XONE [2014]
+              </option>
+
+              <option value="https://www.speedrun.com/fh3">
+                Forza Horizon 3 [2016]
+              </option>
+
+              <option value="https://www.speedrun.com/fh4">
+                Forza Horizon 4 [2018]
+              </option>
+
+              <option value="https://www.speedrun.com/fh5">
+                Forza Horizon 5 [2021]
+              </option>
+
+              <option value="https://www.speedrun.com/fh6">
+                Forza Horizon 6 [2026]
+              </option>
+            </optgroup>
+          </select>
+
+          <button type="submit">Open board →</button>
+        </form>
+      </section>
+
+      <!-- Ruleset selection -->
+
+      <section id="rulesets">
+
+
+        <h2>Community rulesets</h2>
+
+        <p class="section-description">
+          Select a game to open its complete community-maintained
+          ruleset.
+        </p>
+
+        <p class="language-note">
+          Default language: English. The language can be changed
+          from within each ruleset.
+        </p>
+
+        <form class="selector" id="ruleset-selector">
+          <label for="ruleset-game">Select a ruleset</label>
+
+          <select id="ruleset-game" required>
+            <option value="" selected disabled>
+              Choose a ruleset
+            </option>
+
+            <optgroup label="Forza Motorsport Series">
+              <option
+                value="rulesets/en/forza-motorsport-2005.html"
+              >
+                Forza Motorsport [2005] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-2.html"
+              >
+                Forza Motorsport 2 [2007] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-3.html"
+              >
+                Forza Motorsport 3 [2009] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-4.html"
+              >
+                Forza Motorsport 4 [2011] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-5.html"
+              >
+                Forza Motorsport 5 [2013] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-6.html"
+              >
+                Forza Motorsport 6 [2015] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-7.html"
+              >
+                Forza Motorsport 7 [2017] Rules
+              </option>
+
+              <option
+                value="rulesets/en/forza-motorsport-2023.html"
+              >
+                Forza Motorsport [2023] Rules
+              </option>
+            </optgroup>
+
+            <optgroup label="Forza Horizon Series">
+              <option value="rulesets/en/forza-horizon.html">
+                Forza Horizon [2012] Rules
+              </option>
+
+              <option value="rulesets/en/forza-horizon-2.html">
+                Forza Horizon 2 [2014] Rules
+              </option>
+
+              <option value="rulesets/en/forza-horizon-3.html">
+                Forza Horizon 3 [2016] Rules
+              </option>
+
+              <option value="rulesets/en/forza-horizon-4.html">
+                Forza Horizon 4 [2018] Rules
+              </option>
+
+              <option value="rulesets/en/forza-horizon-5.html">
+                Forza Horizon 5 [2021] Rules
+              </option>
+
+              <option value="rulesets/en/forza-horizon-6.html">
+                Forza Horizon 6 [2026] Rules
+              </option>
+            </optgroup>
+          </select>
+
+          <button type="submit">Open ruleset →</button>
+        </form>
+      </section>
+
+      <!-- PR Stunt Calculator -->
+
+      <section id="calculator">
+
+
+        <h2>PR Stunt Calculator</h2>
+
+        <p class="section-description">
+          Convert Drift Zone, Speed Trap, Speed Zone, and Danger Sign
+          results into their corresponding leaderboard time.
+        </p>
+
+        <a class="calculator-link" href="pr-calc.html">
+          Open calculator →
+        </a>
+      </section>
+
+      <!-- FAQ and Mod Team slider -->
+
+      <section id="community">
+
+
+        <h2>Community information</h2>
+
+        <p class="section-description">
+          Learn more about the rules archive or meet the moderators
+          responsible for the Forza speedrunning boards.
+        </p>
+
+        <div class="info-slider">
+          <div
+            class="slider-tabs"
+            role="tablist"
+            aria-label="Community information"
+          >
+            <button
+              class="slider-tab active"
+              id="faq-tab"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="faq-panel"
+              data-slide="0"
+            >
+              FAQ
+            </button>
+
+            <button
+              class="slider-tab"
+              id="modteam-tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="modteam-panel"
+              data-slide="1"
+            >
+              Meet the Mod Team
+            </button>
+          </div>
+
+          <div class="info-viewport" id="info-viewport">
+            <div class="info-track" id="info-track">
+              <!-- FAQ slide -->
+
+              <article
+                class="info-slide"
+                id="faq-panel"
+                role="tabpanel"
+                aria-labelledby="faq-tab"
+              >
+                <div class="slide-heading">
+                  <p>Frequently asked questions</p>
+
+                  <h3>About the archive</h3>
+
+                  <span>
+                    Select a question to open or close its answer.
                   </span>
-                </li>
+                </div>
 
-                <li>
-                  <span class="rule">
-                    The video must remain permanently accessible to
-                    the Mod Team.
+                <ul class="faq-list">
+                  <li>
+                    <details open>
+                      <summary>What is this website?</summary>
+
+                      <p class="faq-answer">
+                        This is a community-maintained archive for the
+                        Forza speedrunning boards and their rulesets.
+                        It provides direct links to the leaderboards and
+                        makes the rules easier to read in multiple
+                        languages.
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>Where do I submit a run?</summary>
+
+                      <p class="faq-answer">
+                        Select your game in the Boards section and open
+                        its speedrun.com leaderboard. Runs are submitted
+                        and verified through the appropriate game board,
+                        not directly through this website.
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>Which ruleset language opens first?</summary>
+
+                      <p class="faq-answer">
+                        Rulesets open in English by default. Use the
+                        language selector at the top of a ruleset page
+                        to switch to another available translation.
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>
+                        What happens if a translation differs from
+                        the English rules?
+                      </summary>
+
+                      <p class="faq-answer">
+                        The English ruleset should be treated as the
+                        primary version if a translated rule is unclear
+                        or outdated. Translation problems can be
+                        reported to the Forza Mod Team.
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>
+                        Why must run videos remain available?
+                      </summary>
+
+                      <p class="faq-answer">
+                        Moderators may need to review a run again after
+                        its original verification. A permanently
+                        accessible video ensures that the submitted run
+                        can still be checked.
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>
+                        How should I name my videos?
+                      </summary>
+
+                      <p class="faq-answer">
+                        Although we do not set strict rules for naming
+                        videos, clear names can make verification and
+                        later re-verification easier for both the
+                        moderator and runner. For full-game runs, use
+                        [Category] [Variables] [Time]. For individual
+                        levels, use [Category] [Class] [Time].
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>How do I report an error?</summary>
+
+                      <p class="faq-answer">
+                        Contact a moderator through the Discord server
+                        or SRC and clearly identify the game, category,
+                        rule, or translation that needs to be reviewed.
+                      </p>
+                    </details>
+                  </li>
+
+                  <li>
+                    <details>
+                      <summary>
+                        Is this an official speedrun.com or Forza site?
+                      </summary>
+
+                      <p class="faq-answer">
+                        No. This is an independent community project
+                        maintained by the moderators responsible for the
+                        Forza speedrunning boards.
+                      </p>
+                    </details>
+                  </li>
+                </ul>
+              </article>
+
+              <!-- Mod Team slide -->
+
+              <article
+                class="info-slide"
+                id="modteam-panel"
+                role="tabpanel"
+                aria-labelledby="modteam-tab"
+                aria-hidden="true"
+                inert
+              >
+                <div class="slide-heading">
+                  <p>Forza board moderators</p>
+
+                  <h3>Meet the Mod Team</h3>
+
+                  <span>
+                    The community members helping maintain and verify
+                    runs across the Forza speedrunning boards.
                   </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    Public or unlisted YouTube videos, Twitch Highlights,
-                    and other permanent video-hosting sites are allowed.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule important">
-                    Twitch VODs, private YouTube videos, TikTok videos,
-                    Xbox Clips, mega.nz links, and other temporary or
-                    file-sharing services are not allowed.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule important">
-                    If the video becomes unavailable, the run will be
-                    rejected. Evidence that the video was previously
-                    available will not be accepted.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    All runs must include in-game sound. Silent runs
-                    will be rejected.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    The full HUD must remain enabled throughout the run.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    The Replay feature cannot be used as a recording
-                    method. Runs recorded using Replay will be rejected.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule important">
-                    The use of mods in any form during runs is strictly forbidden.
-                    This includes modifying the game or using mods to
-                    obtain additional items or currency.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    Listing the car and tune used in the run description
-                    is recommended, but not required.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    The Mod Team reserves the right to request details
-                    about the car and tune used.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    If a run is declared invalid after re-evaluation,
-                    the decision is final. Further direct messages or
-                    spam concerning the decision will not be answered.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    Track cuts are allowed. Checkpoints are the only
-                    enforced track limits.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    All DLC and additional content are allowed unless
-                    stated otherwise in the category rules.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    The order in which events, races, stunts, and other
-                    objectives are completed is left to the runner unless
-                    specified otherwise.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    Additional overlays using the game’s Data Out feature
-                    are allowed if the game supports it.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    The submitted platform must be set to PC when Data Out
-                    overlays are used.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    All difficulty settings are allowed except Assisted
-                    Braking, Assisted Steering, Auto-Steering from Forza
-                    Horizon 5 onward, and ANNA’s Auto Drive.
-                  </span>
-                <li>
-                  <span class="rule">
-                    All Kind of Runs using Seasonal Aspects will be rejected. 
-					The Exception is Showcase Remixes or Seasonal Events 
-					which you cannot opt out of.
-                  </span>
-                </li>
-              </ul>
-            </details>
-          </li>
-
-          <!-- Game-Specific Rules -->
-
-          <li>
-            <details open>
-              <summary>Forza Horizon</summary>
-
-              <ul>
-                <li>
-                  <details open>
-                    <summary>Forza Horizon 6 [2026]</summary>
-
-                    <ul>
-                      <!-- Full Game Runs -->
-
-                      <li>
-                        <details open>
-                          <summary>Full Game Runs</summary>
-
-                          <ul>
-                            <li>
-                              <span class="rule">
-                                All upgrades and tunings are allowed.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                All difficulty settings are allowed except
-                                Auto-Steering, Assisted Steering, Assisted
-                                Braking, and ANNA’s Auto Drive.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Pausing and opening menus count toward
-                                the final time.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                For achievement-related categories, such
-                                as All Barn Finds, timing ends when the
-                                associated achievement requirements have
-                                been completed.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Timing is measured using real time (RTA).
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                For runs longer than 4 hours, the runner
-                                may take a total break of up to 1 hour.
-                                This may be taken all at once or split
-                                into multiple breaks.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                For runs longer than 10 hours, the runner
-                                may take a total break of up to 2.5 hours.
-                              </span>
-                            </li>
-
-                            <!-- Any% Horizon -->
-
-                            <li>
-                              <details>
-                                <summary>Any% (Horizon)</summary>
-
-                                <ul>
-                                  <li>
-                                    <span class="rule">
-                                      Timing starts when the player first
-                                      gains control of the Nissan GT-R
-                                      NISMO on the ground during the
-                                      Initial Drive.
-                                    </span>
-                                  </li>
-
-                                  <li>
-                                    <span class="rule">
-                                      Timing ends when the screen fades
-                                      to black after completing the Gold
-                                      Wristband Event.Or the Designated
-									  Wristband Color for Wristband Runs.
-                                    </span>
-                                  </li>
-                                </ul>
-                              </details>
-                            </li>
-
-                            <!-- Any% Japan -->
-
-                            <li>
-                              <details>
-                                <summary>Any% (Japan)</summary>
-
-                                <ul>
-                                  <li>
-                                    <span class="rule">
-                                      Timing starts when the player first
-                                      gains control of the Nissan GT-R
-                                      NISMO on the ground during the
-                                      Initial Drive.
-                                    </span>
-                                  </li>
-
-                                  <li>
-                                    <span class="rule">
-                                      Timing ends when the the Gold or the Respective Categories Stamp
-                                      is obtained.
-                                    </span>
-                                  </li>
-                                </ul>
-                              </details>
-                            </li>
-
-                            <!-- All Races Categories -->
-
-                            <li>
-                              <details>
-                                <summary>
-                                  All Races / All Races [Category] /
-                                  All Wristbands
-                                </summary>
-
-                                <ul>
-                                  <li>
-                                    <span class="rule">
-                                      For All Races, all Road Races,
-                                      Dirt Races, Cross-Country Races,
-                                      Street Races, Touge Races, and
-                                      Drag Races must be completed.
-                                    </span>
-                                  </li>
-
-                                  <li>
-                                    <span class="rule">
-                                      For All Races [Category], all races
-                                      belonging to the selected category
-                                      must be completed.
-                                    </span>
-                                  </li>
-
-                                  <li>
-                                    <span class="rule">
-                                      For All Wristbands, all Wristband
-                                      Events must be completed.
-                                    </span>
-                                  </li>
-
-                                  <li>
-                                    <span class="rule">
-                                      Resetting the game or using a new
-                                      save is not required.
-                                    </span>
-                                  </li>
-
-                                  <li>
-                                    <span class="rule">
-                                      Timing starts when “Start Race”
-                                      is selected for the first race.
-                                    </span>
-                                  </li>
-
-                                  <li>
-                                    <span class="rule">
-                                      Timing ends when the player crosses
-                                      the finish line in the final race.
-                                    </span>
-                                  </li>
-                                </ul>
-                              </details>
-                            </li>
-                          </ul>
-                        </details>
-                      </li>
-
-
-
-                      <!-- Drift Attack -->
-
-                      <li>
-                        <details open>
-                          <summary>Driftattack</summary>
-
-                          <ul>
-                            <li>
-                              <span class="rule">
-                                The Runner may only use the Prior Lap to Build up Speed or Angle the car. And Rewinds are not Allowed
-                              </span>
-                            </li>
-							
-                            <li>
-                              <span class="rule">
-                                Time is Calculated by the Dirftpoints the runner accumulates during the Run.
-                                To Calculate the Time it is Recommended to use the PR Stunt Calculator on the Main Page with the "Driftzone" Setting.
-								If the Runner wishes to Calculate the Time Themselves the Formula is 1 Drift Point=1 Milisec.
-                              </span>
-                            </li>
-
-                      <!-- Individual Races -->
-
-                      <li>
-                        <details open>
-                          <summary>Individual Races</summary>
-
-                          <ul>
-                            <li>
-                              <span class="rule">
-                                Track cuts are allowed. Checkpoints are
-                                the only enforced track limits.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                The final time is the time shown by the
-                                game after completing the race.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                The final time must be shown using an
-                                in-game screen at the end of the submitted
-                                video.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Custom layouts are not allowed.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Changing car restrictions, weather,
-                                season, and time of day is permitted
-                                for the Standard Race category.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                For Festival Races, the settings must
-                                remain unchanged.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                The original Forza race layout and race
-                                length must be used.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Rewinds are not allowed.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                The car’s class must be visible at some
-                                point during the run for verification.
-                              </span>
-                            </li>
-							
-                            <li>
-                              <span class="rule">
-                                The car’s class must be visible at some
-                                point during the run for verification.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                For Point to Point Rivals the runner may not drive back
-                                to build up more Speed and must start from the 
-                                Starting Position.
-                              </span>
-                            </li>
-							
-                            <li>
-                              <span class="rule">
-                                For Rivals With Laps/Timeattack's the runner may only use
-                                the prior Lap to build up speed.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                For Time Attacks/Rivals, the car’s class must
-                                be shown before or after the attempt.
-                              </span>
-                            </li>
-
-                            <!-- Showcase Events -->
-
-                            <li>
-                              <details>
-                                <summary>Wristband Events</summary>
-
-                                <ul>
-                                  <li>
-                                    <span class="rule">
-                                      Timing uses in-game time (IGT).
-                                    </span>
-                                  </li>
-
-                                  <li>
-                                    <span class="rule">
-                                      The final time is the time shown
-                                      by the game after completing the
-                                      Wristband Event.
-                                    </span>
-                                  </li>
-
-                                  <li>
-                                    <span class="rule">
-                                      The final time must be shown at the
-                                      end of the submitted video.
-                                    </span>
-                                  </li>
-                                </ul>
-                              </details>
-                            </li>
-                          </ul>
-                        </details>
-                      </li>
-                    </ul>
-                  </details>
-                </li>
-              </ul>
-            </details>
-          </li>
-        </ul>
+                </div>
+
+                <div class="mod-grid">
+                  <article class="mod-card">
+                    <strong>Sappytron</strong>
+                    <span>Also known as Sappy</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>AllanEndopay</strong>
+                    <span>Also known as Allan the Marathon Man</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>RealMartello / ShawnMartello</strong>
+                    <span>
+                      Also known as Shawn / Fkin Tired Frankie
+                    </span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Kayraman1 / KayKreideschrei</strong>
+                    <span>
+                      Also known as Kay / John Gauntlet van Diablo
+                    </span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Brandomusic</strong>
+                    <span>Also known as Brando the Titan</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Scoagogo</strong>
+                    <span>Also known as Scoa</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Zade</strong>
+                    <span>Also known as Quattro</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Veyron</strong>
+                    <span>
+                      Also known as Veyron the Limousine King
+                    </span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>tcrdragracing</strong>
+                    <span>Also known as TCR</span>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Rajzon</strong>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Master System Marcel</strong>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>Shenaniganz</strong>
+                  </article>
+
+                  <article class="mod-card">
+                    <strong>omegaknife99</strong>
+                  </article>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
+    <!-- Legal disclaimer -->
+
+    <section
+      class="legal-disclaimer"
+      aria-labelledby="legal-heading"
+    >
+      <h2 id="legal-heading">Legal disclaimer</h2>
+
+      <p>
+        This website and its maintainers are not speedrun.com management
+        staff. The Forza Mod Team is responsible only for the Forza
+        speedrunning boards linked on this website. This is an independent,
+        non-commercial community project and is not affiliated with,
+        endorsed by, or sponsored by speedrun.com, Forza, Playground Games,
+        Turn 10 Studios, or Microsoft. This website does not display paid
+        advertising or generate advertising revenue. All trademarks and
+        game-related properties belong to their respective owners.
+      </p>
+    </section>
+
     <footer>
       <p>Forza Speedrunning Community</p>
+      <p>Community-maintained rules archive</p>
     </footer>
 
     <script>
-      const supportedLanguages = [
-        "en",
-        "de",
-        "fr",
-        "es",
-        "ja",
-        "ru"
-      ];
+      /*
+        Open the selected board or ruleset.
+      */
 
-      const languageSelector =
-        document.getElementById("language");
+      function openSelectedLink(event, selectId) {
+        event.preventDefault();
 
-      languageSelector.value =
-        document.documentElement.lang;
+        const dropdown = document.getElementById(selectId);
+        const selectedLink = dropdown.value;
 
-      languageSelector.addEventListener("change", function () {
-        const selectedLanguage = languageSelector.value;
-        const pathParts = window.location.pathname.split("/");
+        if (selectedLink) {
+          window.location.href = selectedLink;
+        }
+      }
 
-        const languagePosition = pathParts.findIndex(
-          function (folder) {
-            return supportedLanguages.includes(folder);
-          }
-        );
+      document
+        .getElementById("board-selector")
+        .addEventListener("submit", function (event) {
+          openSelectedLink(event, "board-game");
+        });
 
-        if (languagePosition === -1) {
-          console.error(
-            "No language folder was found in the current address."
+      document
+        .getElementById("ruleset-selector")
+        .addEventListener("submit", function (event) {
+          openSelectedLink(event, "ruleset-game");
+        });
+
+      /*
+        FAQ and Mod Team slider.
+      */
+
+      const sliderTabs =
+        document.querySelectorAll(".slider-tab");
+
+      const sliderPanels =
+        document.querySelectorAll(".info-slide");
+
+      const infoTrack =
+        document.getElementById("info-track");
+
+      const infoViewport =
+        document.getElementById("info-viewport");
+
+      let activeSlide = 0;
+
+      function updateSliderHeight() {
+        const activePanel = sliderPanels[activeSlide];
+
+        infoViewport.style.height =
+          activePanel.scrollHeight + "px";
+      }
+
+      function showSlide(slideNumber) {
+        activeSlide = slideNumber;
+
+        infoTrack.style.transform =
+          "translateX(-" + slideNumber * 100 + "%)";
+
+        sliderTabs.forEach(function (tab, index) {
+          const isActive = index === slideNumber;
+
+          tab.classList.toggle("active", isActive);
+          tab.setAttribute(
+            "aria-selected",
+            String(isActive)
+          );
+        });
+
+        sliderPanels.forEach(function (panel, index) {
+          const isActive = index === slideNumber;
+
+          panel.setAttribute(
+            "aria-hidden",
+            String(!isActive)
           );
 
-          return;
-        }
+          panel.inert = !isActive;
+        });
 
-        pathParts[languagePosition] = selectedLanguage;
+        updateSliderHeight();
+      }
 
-        const newAddress =
-          pathParts.join("/") +
-          window.location.search +
-          window.location.hash;
-
-        window.location.href = newAddress;
+      sliderTabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          showSlide(Number(tab.dataset.slide));
+        });
       });
+
+      document
+        .querySelectorAll(".faq-list details")
+        .forEach(function (question) {
+          question.addEventListener(
+            "toggle",
+            updateSliderHeight
+          );
+        });
+
+      window.addEventListener(
+        "resize",
+        updateSliderHeight
+      );
+
+      showSlide(0);
     </script>
   </body>
 </html>
