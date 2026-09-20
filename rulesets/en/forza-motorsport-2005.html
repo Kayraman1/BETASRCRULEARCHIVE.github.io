@@ -306,9 +306,9 @@
           <option value="de">Deutsch</option>
           <option value="fr">Français</option>
           <!-- These translations do not exist yet. -->
-          <option value="es" disabled>Español — coming soon</option>
-          <option value="ja" disabled>日本語 — coming soon</option>
-          <option value="ru" disabled>Русский — coming soon</option>
+          <option value="es">Español</option>
+          <option value="ja">日本語</option>
+          <option value="ru">Русский</option>
         </select>
       </div>
     </header>
@@ -326,261 +326,109 @@
 
       <section class="rules-panel">
         <ul class="rule-tree">
-          <!-- General rules -->
-
           <li>
             <details open>
               <summary>General Rules</summary>
-
               <ul>
-                <li>
-                  <span class="rule">
-                    All runs require video verification.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    Videos must be securely and permanently hosted.
-                    YouTube or permanent Twitch VODs are recommended.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule important">
-                    If the video becomes unavailable, the run may
-                    be rejected.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    Moderator decisions made after a re-evaluation
-                    must not be targeted with further direct messages
-                    or spam.
-                  </span>
-                </li>
-
-                <li>
-                  <span class="rule">
-                    Game sound must be present during the run.
-                  </span>
-                </li>
+                <li><span class="rule">All runs require a complete video for verification.</span></li>
+                <li><span class="rule">The video must remain permanently accessible to the Mod Team.</span></li>
+                <li><span class="rule">Public or unlisted YouTube videos, Twitch Highlights, and other permanent video-hosting sites are allowed.</span></li>
+                <li><span class="rule">Twitch VODs, private YouTube videos, TikTok videos, Xbox Clips, mega.nz links, and other temporary or file-sharing services are not allowed.</span></li>
+                <li><span class="rule important">If the video becomes unavailable, the run will be rejected. Evidence that the video was previously available will not be accepted.</span></li>
+                <li><span class="rule">All runs must include in-game sound. Silent runs will be rejected.</span></li>
+                <li><span class="rule">The full HUD must remain enabled throughout the run.</span></li>
+                <li><span class="rule">The Replay feature cannot be used as a recording method. Runs recorded using Replay will be rejected.</span></li>
+                <li><span class="rule important">The use of mods in any form during runs is strictly forbidden. This includes modifying the game or using mods to obtain additional items or currency.</span></li>
+                <li><span class="rule">The Mod Team reserves the right to request details about the car and tune used.</span></li>
+                <li><span class="rule important">If a run is declared invalid after re-evaluation, the decision is final. Further direct messages or spam concerning the decision will not be answered.</span></li>
+                <li><span class="rule">All DLC and additional content are allowed unless stated otherwise in the category rules.</span></li>
+                <li><span class="rule">The order in which events, races, stunts, and other objectives are completed is left to the runner unless specified otherwise.</span></li>
+                <li><span class="rule">All difficulty settings are allowed.</span></li>
+                <li><span class="rule important">All kinds of runs using Online Multiplayer Races will be rejected. The exception is Rivals.</span></li>
               </ul>
             </details>
           </li>
-
-          <!-- Game-specific rules -->
-
           <li>
             <details open>
               <summary>Forza Motorsport</summary>
-
               <ul>
                 <li>
                   <details open>
-                    <summary>Forza Motorsport [2005]</summary>
-
+                    <summary>Forza Motorsport 1 [2005]</summary>
                     <ul>
-                      <!-- Full Game Runs -->
-
                       <li>
                         <details open>
                           <summary>Full Game Runs</summary>
-
                           <ul>
-                            <li>
-                              <span class="rule">
-                                Any difficulty settings are allowed.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Any upgrades and tuning settings are allowed.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Pausing and opening menus count toward
-                                the final time.
-                              </span>
-                            </li>
+                            <li><span class="rule">All difficulty settings are allowed.</span></li>
+                            <li><span class="rule">Pausing and opening menus counts toward the final time.</span></li>
+                            <li><span class="rule">Timing is measured using real time (RTA).</span></li>
+                            <li><span class="rule">For runs longer than 4 hours, the runner may take a total break of up to 1 hour. This may be taken all at once or split into multiple breaks.</span></li>
+                            <li><span class="rule">For runs longer than 10 hours, the runner may take a total break of up to 2.5 hours.</span></li>
+                            <li><span class="rule">For Any%, the run may be segmented, and each segment must be at least 3 hours long.</span></li>
+                            <li><span class="rule">At the end and beginning of a segment, the stats from the Profile Select Screen or Profile Stats Screen must be shown.</span></li>
                           </ul>
                         </details>
                       </li>
-
-                      <!-- All Races -->
-
                       <li>
-                        <details open>
+                        <details>
                           <summary>All Races</summary>
-
                           <ul>
-                            <li>
-                              <span class="rule">
-                                Timing begins when the Start Race button
-                                is pressed.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Timing ends on the final frame where the
-                                player controls the car in the last race.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Any car available from the player’s garage
-                                may be used if the game permits it.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Timing is measured using real time (RTA).
-                              </span>
-                            </li>
+                            <li><span class="rule">For the All Races [Category], all races belonging to the selected category must be completed.</span></li>
+                            <li><span class="rule">Resetting the game or using a new save is not required.</span></li>
+                            <li><span class="rule">Timing starts when “Start Race” is selected for the first race.</span></li>
+                            <li><span class="rule">Timing ends when the player crosses the finish line in the final race.</span></li>
                           </ul>
                         </details>
                       </li>
-
-                      <!-- Series Runs -->
-
+                      <li>
+                        <details>
+                          <summary>Career</summary>
+                          <ul>
+                            <li><span class="rule">For Career All [Category], all races belonging to the selected category must be completed.</span></li>
+                            <li><span class="rule">Resetting the game or using a new save is not required.</span></li>
+                            <li><span class="rule">Timing starts when “Start Race” is selected for the first race.</span></li>
+                            <li><span class="rule">Timing ends when the player crosses the finish line in the final race.</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li>
+                        <details>
+                          <summary>Career Any%</summary>
+                          <ul>
+                            <li><span class="rule">Timing starts when Career Mode is pressed on a new profile.</span></li>
+                            <li><span class="rule">Timing ends when the car crosses the finish line of the Endurance Category Class R-P1 Championship at Nürburgring.</span></li>
+                          </ul>
+                        </details>
+                      </li>
                       <li>
                         <details>
                           <summary>Series Runs</summary>
-
                           <ul>
-                            <li>
-                              <span class="rule">
-                                Timing begins when Start Race is pressed
-                                for the first race in the selected series.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Timing ends on the final frame where the
-                                player controls the car in the last race
-                                of that series.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Timing is measured using real time (RTA).
-                              </span>
-                            </li>
+                            <li><span class="rule">Timing starts when the Start Race button is pressed for the selected series.</span></li>
+                            <li><span class="rule">Timing ends when crossing the finish line for the last race of the series.</span></li>
+                            <li><span class="rule">Refer to the races listed on the board and/or the Series Number in the game under Arcade Races to determine which races must be completed.</span></li>
                           </ul>
                         </details>
                       </li>
-
-                      <!-- Time Trials -->
-
-                      <li>
-                        <details>
-                          <summary>Time Trials</summary>
-
-                          <ul>
-                            <li>
-                              <span class="rule">
-                                Timing uses in-game time (IGT).
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                The final time is the value displayed by
-                                the game at the end of the time trial.
-                              </span>
-                            </li>
-                          </ul>
-                        </details>
-                      </li>
-
-                      <!-- Career Runs -->
-
-                      <li>
-                        <details>
-                          <summary>Career Runs</summary>
-
-                          <ul>
-                            <li>
-                              <span class="rule">
-                                Unlock-category timing begins when the
-                                player confirms the profile name.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Unlock-category timing ends when the game
-                                confirms that the category has been unlocked.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Career Any% timing begins when the player
-                                confirms the profile name.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Career Any% timing ends on the final frame
-                                of the last required career race.
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                Career runs may be completed in multiple
-                                recorded parts.
-                              </span>
-
-                              <ul>
-                                <li>
-                                  <span class="rule">
-                                    Before pausing, show the garage,
-                                    available money, and the active timer.
-                                  </span>
-                                </li>
-
-                                <li>
-                                  <span class="rule">
-                                    Show the same information before
-                                    continuing the next recorded part.
-                                  </span>
-                                </li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </details>
-                      </li>
-
-                      <!-- Individual Level Runs -->
-
                       <li>
                         <details open>
-                          <summary>Individual Level Runs (IL)</summary>
-
+                          <summary>Individual Races</summary>
                           <ul>
+                            <li><span class="rule">Timing is measured using in-game time (IGT).</span></li>
+                            <li><span class="rule">Track cuts are allowed.</span></li>
+                            <li><span class="rule">For Arcade, Autocross, and P2P races, the final time is the time shown on the Results Screen after the race.</span></li>
+                            <li><span class="rule">For Hotlaps, the Best Lap shown in the video counts.</span></li>
+                            <li><span class="rule">If the video contains multiple runs, the runner must timestamp when the Best Lap is completed.</span></li>
+                            <li><span class="rule">The runner may also show only the Best Lap.</span></li>
+                            <li><span class="rule">The car’s class must be visible at some point during the run for verification.</span></li>
                             <li>
-                              <span class="rule">
-                                Timing uses in-game time (IGT).
-                              </span>
-                            </li>
-
-                            <li>
-                              <span class="rule">
-                                The submitted time must match the result
-                                displayed at the end of the race.
-                              </span>
+                              <details>
+                                <summary>Time Trials</summary>
+                                <ul>
+                                  <li><span class="rule">The submitted time must be the time shown after the race on the Results Screen.</span></li>
+                                </ul>
+                              </details>
                             </li>
                           </ul>
                         </details>
@@ -601,11 +449,11 @@
 
     <script>
       /*
-        Only English and German are active for now because
-        those translation pages currently exist.
+        All language routes are enabled. Each language folder must contain
+        its corresponding ruleset page for navigation to work.
       */
 
-      const supportedLanguages = ["en", "de", "fr"];
+      const supportedLanguages = ["en", "de", "fr", "es", "ja", "ru"];
       const languageSelector = document.getElementById("language");
 
       languageSelector.value = document.documentElement.lang;
